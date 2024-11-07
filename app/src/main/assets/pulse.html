@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .pulse-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .pulse {
+            width: 100px;
+            height: 100px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        .readings {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="pulse-container">
+    <div class="pulse"></div>
+    <div class="readings">
+        <div>Light: <span id="lightValue">--</span></div>
+        <div>Pressure: <span id="pressureValue">--</span></div>
+    </div>
+</div>
+<script>
+    // Function to update sensor values
+    function updateSensorValues(light, pressure) {
+        document.getElementById('lightValue').textContent = light.toFixed(2);
+        document.getElementById('pressureValue').textContent = pressure.toFixed(2);
+
+        // Adjust pulse speed based on sensor values
+        const pulseElement = document.querySelector('.pulse');
+        const animationDuration = Math.max(0.5, Math.min(3, (light + pressure) / 100));
+        pulseElement.style.animation = `pulse ${animationDuration}s infinite`;
+    }
+
+    // Function that Android will call
+    function updateFromAndroid(sensorData) {
+        const data = JSON.parse(sensorData);
+        updateSensorValues(data.light, data.pressure);
+    }
+</script>
+</body>
+</html>
