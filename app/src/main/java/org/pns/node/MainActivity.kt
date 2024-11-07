@@ -27,20 +27,15 @@ import java.util.*
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private val nodeId = UUID.randomUUID().toString().take(8)
     private val sensorValues = mutableMapOf<Int, Float>()
+    private var lastUpdateTime = 0L
+
     private lateinit var sensorManager: SensorManager
     private lateinit var database: PlanetaryDatabase
     private lateinit var webView: WebView
-
-    // Fixed views property with explicit types
-    private val views: Map<String, View> by lazy {
-        mapOf(
-            "readings" to findViewById<TextView>(R.id.readingsText),
-            "nodeId" to findViewById<TextView>(R.id.nodeIdText),
-            "scroll" to findViewById<ScrollView>(R.id.readingsScrollView),
-            "start" to findViewById<Button>(R.id.startButton),
-            "share" to findViewById<Button>(R.id.shareButton)
-        )
-    }
+    private lateinit var readingsText: TextView
+    private lateinit var scrollView: ScrollView
+    private lateinit var startButton: Button
+    private lateinit var shareButton: Button
 
     inner class WebAppInterface {
         @JavascriptInterface
@@ -48,62 +43,55 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             "pressure":${sensorValues[Sensor.TYPE_PRESSURE] ?: 0f}}"""
     }
 
-    data class PlanetaryMeaning(
-        val condition: String,
-        val meaning: String,
-        val planetaryImpact: String,
-        val ecosystemRole: String,
-        val recommendation: String
+    data class EarthPattern(
+        val trend: String,
+        val description: String,
+        val prediction: String,
+        val action: String
     )
 
-    private val planetarySensors = mapOf(
+    private val patterns = mapOf(
         Sensor.TYPE_LIGHT to { value: Float ->
             when {
-                value < 10 -> PlanetaryMeaning(
-                    condition = "Night Time / Deep Shade",
-                    meaning = "Earth's regeneration period",
-                    planetaryImpact = "Supporting nocturnal biodiversity",
-                    ecosystemRole = "Enabling nocturnal species activities",
-                    recommendation = "Monitor ecosystem regeneration"
+                value < 50 -> EarthPattern(
+                    "Night/Shade",
+                    "Earth's regeneration period",
+                    "Nocturnal ecosystem activity",
+                    "Monitor night patterns"
                 )
-                value < 200 -> PlanetaryMeaning(
-                    condition = "Dawn/Dusk Transition",
-                    meaning = "Critical ecosystem transition",
-                    planetaryImpact = "Circadian rhythm sync",
-                    ecosystemRole = "Species behavioral changes",
-                    recommendation = "Monitor activity transitions"
+                value < 1000 -> EarthPattern(
+                    "Transition",
+                    "Dawn/Dusk period",
+                    "Species transition time",
+                    "Track behavioral changes"
                 )
-                else -> PlanetaryMeaning(
-                    condition = "Daylight",
-                    meaning = "Peak photosynthetic period",
-                    planetaryImpact = "Maximum productivity",
-                    ecosystemRole = "Energy flow activation",
-                    recommendation = "Track energy patterns"
+                else -> EarthPattern(
+                    "Full Light",
+                    "Peak activity period",
+                    "Maximum ecosystem energy",
+                    "Observe peak patterns"
                 )
             }
         },
         Sensor.TYPE_PRESSURE to { value: Float ->
             when {
-                value < 980 -> PlanetaryMeaning(
-                    condition = "Low Pressure System",
-                    meaning = "Active dynamics",
-                    planetaryImpact = "Weather development",
-                    ecosystemRole = "Species behavior shift",
-                    recommendation = "Monitor weather changes"
+                value < 980 -> EarthPattern(
+                    "Low Pressure",
+                    "Weather system developing",
+                    "Potential weather changes",
+                    "Monitor system evolution"
                 )
-                value < 1020 -> PlanetaryMeaning(
-                    condition = "Normal Pressure",
-                    meaning = "Stable conditions",
-                    planetaryImpact = "Regular patterns",
-                    ecosystemRole = "Normal functions",
-                    recommendation = "Observe baseline"
+                value < 1020 -> EarthPattern(
+                    "Normal Pressure",
+                    "Stable conditions",
+                    "Maintaining patterns",
+                    "Record baseline data"
                 )
-                else -> PlanetaryMeaning(
-                    condition = "High Pressure",
-                    meaning = "Clear conditions",
-                    planetaryImpact = "Weather stability",
-                    ecosystemRole = "Clear-weather activity",
-                    recommendation = "Monitor behavior"
+                else -> EarthPattern(
+                    "High Pressure",
+                    "Clear weather system",
+                    "Stable conditions ahead",
+                    "Track stability effects"
                 )
             }
         }
@@ -112,20 +100,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupViews()
+        initializeViews()
         checkPermissions()
     }
 
-    private fun setupViews() {
-        (views["nodeId"] as? TextView)?.text = "Earth Connection Point #$nodeId"
+    private fun initializeViews() {
+        readingsText = findViewById(R.id.readingsText)
+        scrollView = findViewById(R.id.readingsScrollView)
+        startButton = findViewById(R.id.startButton)
+        shareButton = findViewById(R.id.shareButton)
+
+        findViewById<TextView>(R.id.nodeIdText).text = "Earth Connection Point #$nodeId"
+
         webView = findViewById<WebView>(R.id.earthPulseWebView).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             addJavascriptInterface(WebAppInterface(), "Android")
             loadUrl("file:///android_asset/pulse.html")
         }
-        views["start"]?.setOnClickListener { startSensing() }
-        views["share"]?.setOnClickListener { shareReadings() }
+
+        startButton.setOnClickListener { startSensing() }
+        shareButton.setOnClickListener { shareReadings() }
     }
 
     private fun startSensing() {
@@ -133,57 +128,59 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         database = PlanetaryDatabase.getDatabase(applicationContext)
 
         var activeSensors = 0
-        planetarySensors.keys.forEach { type ->
+        patterns.keys.forEach { type ->
             sensorManager.getDefaultSensor(type)?.let { sensor ->
                 sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
                 activeSensors++
             }
         }
 
-        (views["readings"] as? TextView)?.apply {
-            text = "🌍 Earth Connection Established\n\nListening through $activeSensors sensors...\n\n"
-        }
+        readingsText.text = "🌍 Earth Connection Established\n\nMonitoring through $activeSensors sensors...\n\n"
     }
 
     override fun onSensorChanged(event: SensorEvent) {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastUpdateTime < 1000) return  // Update once per second
+        lastUpdateTime = currentTime
+
         val type = event.sensor.type
         val value = event.values[0]
         sensorValues[type] = value
 
         webView.evaluateJavascript("updateSensorData(${WebAppInterface().getSensorData()})", null)
 
-        planetarySensors[type]?.let { interpreter ->
-            val reading = interpreter(value)
+        patterns[type]?.let { interpreter ->
+            val pattern = interpreter(value)
             val timestamp = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
 
             lifecycleScope.launch {
                 database.sensorReadingDao().insert(SensorReading(
-                    timestamp = System.currentTimeMillis(),
+                    timestamp = currentTime,
                     nodeId = nodeId,
                     sensorType = type,
                     value = value,
-                    condition = reading.condition,
-                    meaning = reading.meaning,
-                    planetaryImpact = reading.planetaryImpact,
-                    ecosystemRole = reading.ecosystemRole,
-                    recommendation = reading.recommendation
+                    condition = pattern.trend,
+                    meaning = pattern.description,
+                    planetaryImpact = pattern.prediction,
+                    ecosystemRole = pattern.action,
+                    recommendation = ""
                 ))
 
-                (views["readings"] as? TextView)?.append("""
+                readingsText.append("""
                     ═══════════════════════
                     🕒 $timestamp
+                    
+                    📊 ${pattern.trend}
                     Value: $value
                     
-                    🌍 ${reading.condition}
-                    🌱 ${reading.meaning}
-                    🌐 ${reading.planetaryImpact}
-                    🍃 ${reading.ecosystemRole}
-                    💡 ${reading.recommendation}
+                    🌍 ${pattern.description}
+                    🔮 ${pattern.prediction}
+                    💡 ${pattern.action}
                     ═══════════════════════
                     
                 """.trimIndent() + "\n\n")
 
-                (views["scroll"] as? ScrollView)?.fullScroll(View.FOCUS_DOWN)
+                scrollView.fullScroll(View.FOCUS_DOWN)
             }
         }
     }
@@ -195,9 +192,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 append("🌍 Earth Connection Report #$nodeId\n\n")
                 readings.forEach { reading ->
                     append("═══════════════════════\n")
-                    append("Condition: ${reading.condition}\n")
-                    append("Message: ${reading.meaning}\n")
-                    append("Impact: ${reading.planetaryImpact}\n")
+                    append("Status: ${reading.condition}\n")
+                    append("Earth Speaks: ${reading.meaning}\n")
+                    append("Prediction: ${reading.planetaryImpact}\n")
                     append("═══════════════════════\n\n")
                 }
             }
