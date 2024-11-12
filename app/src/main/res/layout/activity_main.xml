@@ -22,20 +22,12 @@
         android:layout_height="200dp"
         android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/locationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textStyle="italic"
-        android:text="Listening to Earth's signals..." />
-
-    <View
-        android:id="@+id/earthPulseVisualizer"
+    <!-- Earth Pulse Visualization -->
+    <org.pns.node.EarthPulseView
+        android:id="@+id/earthPulseView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/earth_pulse_background"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="200dp"
+        android:background="@drawable/earth" />
 
     <ScrollView
         android:id="@+id/readingsScrollView"

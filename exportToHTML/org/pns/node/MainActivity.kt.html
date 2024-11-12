@@ -1,0 +1,255 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">Manifest</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">pm</span><span class="s2">.</span><span class="s1">PackageManager</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">hardware</span><span class="s2">.</span><span class="s1">Sensor</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">hardware</span><span class="s2">.</span><span class="s1">SensorEvent</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">hardware</span><span class="s2">.</span><span class="s1">SensorEventListener</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">hardware</span><span class="s2">.</span><span class="s1">SensorManager</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">webkit</span><span class="s2">.</span><span class="s1">JavascriptInterface</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">webkit</span><span class="s2">.</span><span class="s1">WebView</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">ScrollView</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">ActivityCompat</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">ContextCompat</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">lifecycle</span><span class="s2">.</span><span class="s1">lifecycleScope</span>
+<span class="s1">import kotlinx</span><span class="s2">.</span><span class="s1">coroutines</span><span class="s2">.</span><span class="s1">launch</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">analysis</span><span class="s2">.</span><span class="s1">EnvironmentalAnalyzer</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">PlanetaryDatabase</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">SensorReading</span>
+<span class="s1">import java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span>
+<span class="s1">import java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity</span><span class="s2">(), </span><span class="s1">SensorEventListener </span><span class="s2">{</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">nodeId </span><span class="s2">= </span><span class="s1">UUID</span><span class="s2">.</span><span class="s1">randomUUID</span><span class="s2">().</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">take</span><span class="s2">(</span><span class="s3">8</span><span class="s2">)</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">sensorValues </span><span class="s2">= </span><span class="s1">mutableMapOf</span><span class="s2">&lt;</span><span class="s1">Int</span><span class="s2">, </span><span class="s1">Float</span><span class="s2">&gt;()</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">lastUpdateTime </span><span class="s2">= </span><span class="s3">0L</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">environmentalAnalyzer: EnvironmentalAnalyzer</span>
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">sensorManager: SensorManager</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">database: PlanetaryDatabase</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">webView: WebView</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">readingsText: TextView</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">scrollView: ScrollView</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">startButton: Button</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">shareButton: Button</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">earthPulseView: EarthPulseView</span>
+
+    <span class="s1">inner </span><span class="s0">class </span><span class="s1">WebAppInterface </span><span class="s2">{</span>
+        <span class="s1">@JavascriptInterface</span>
+        <span class="s0">fun </span><span class="s1">getSensorData</span><span class="s2">()</span><span class="s1">: String </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">patterns </span><span class="s2">= </span><span class="s1">environmentalAnalyzer</span><span class="s2">.</span><span class="s1">getActivePatterns</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">patternsJson </span><span class="s2">= </span><span class="s1">patterns</span><span class="s2">.</span><span class="s1">joinToString</span><span class="s2">(</span><span class="s4">&quot;,&quot;</span><span class="s2">) { </span><span class="s1">it</span><span class="s2">.</span><span class="s1">toJson</span><span class="s2">() }</span>
+
+            <span class="s0">return </span><span class="s4">&quot;&quot;&quot;</span>
+                <span class="s4">{</span>
+                    <span class="s4">&quot;light&quot;: </span><span class="s0">${</span><span class="s1">sensorValues</span><span class="s2">[</span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_LIGHT</span><span class="s2">] </span><span class="s1">?: </span><span class="s3">0f</span><span class="s0">}</span><span class="s4">,</span>
+                    <span class="s4">&quot;pressure&quot;: </span><span class="s0">${</span><span class="s1">sensorValues</span><span class="s2">[</span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_PRESSURE</span><span class="s2">] </span><span class="s1">?: </span><span class="s3">0f</span><span class="s0">}</span><span class="s4">,</span>
+                    <span class="s4">&quot;patterns&quot;: [</span><span class="s0">$</span><span class="s1">patternsJson</span><span class="s4">]</span>
+                <span class="s4">}</span>
+            <span class="s4">&quot;&quot;&quot;</span><span class="s2">.</span><span class="s1">trimIndent</span><span class="s2">()</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_main</span><span class="s2">)</span>
+        <span class="s1">environmentalAnalyzer </span><span class="s2">= </span><span class="s1">EnvironmentalAnalyzer</span><span class="s2">()</span>
+        <span class="s1">initializeViews</span><span class="s2">()</span>
+        <span class="s1">checkPermissions</span><span class="s2">()</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">initializeViews</span><span class="s2">() {</span>
+        <span class="s1">readingsText </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">readingsText</span><span class="s2">)</span>
+        <span class="s1">scrollView </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">readingsScrollView</span><span class="s2">)</span>
+        <span class="s1">startButton </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">startButton</span><span class="s2">)</span>
+        <span class="s1">shareButton </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">shareButton</span><span class="s2">)</span>
+        <span class="s1">earthPulseView </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">earthPulseView</span><span class="s2">)</span>
+
+        <span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">nodeIdText</span><span class="s2">).</span><span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;Earth Connection Point #</span><span class="s0">$</span><span class="s1">nodeId</span><span class="s4">&quot;</span>
+
+        <span class="s1">webView </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">WebView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">earthPulseWebView</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">settings</span><span class="s2">.</span><span class="s1">javaScriptEnabled </span><span class="s2">= </span><span class="s0">true</span>
+            <span class="s1">settings</span><span class="s2">.</span><span class="s1">domStorageEnabled </span><span class="s2">= </span><span class="s0">true</span>
+            <span class="s1">addJavascriptInterface</span><span class="s2">(</span><span class="s1">WebAppInterface</span><span class="s2">(), </span><span class="s4">&quot;Android&quot;</span><span class="s2">)</span>
+            <span class="s1">loadUrl</span><span class="s2">(</span><span class="s4">&quot;file:///android_asset/pulse.html&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+
+        <span class="s1">startButton</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{ </span><span class="s1">startSensing</span><span class="s2">() }</span>
+        <span class="s1">shareButton</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{ </span><span class="s1">shareReadings</span><span class="s2">() }</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">startSensing</span><span class="s2">() {</span>
+        <span class="s1">sensorManager </span><span class="s2">= </span><span class="s1">getSystemService</span><span class="s2">(</span><span class="s1">SENSOR_SERVICE</span><span class="s2">) </span><span class="s0">as </span><span class="s1">SensorManager</span>
+        <span class="s1">database </span><span class="s2">= </span><span class="s1">PlanetaryDatabase</span><span class="s2">.</span><span class="s1">getDatabase</span><span class="s2">(</span><span class="s1">applicationContext</span><span class="s2">)</span>
+
+        <span class="s0">var </span><span class="s1">activeSensors </span><span class="s2">= </span><span class="s3">0</span>
+        <span class="s1">listOf</span><span class="s2">(</span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_LIGHT</span><span class="s2">, </span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_PRESSURE</span><span class="s2">).</span><span class="s1">forEach </span><span class="s2">{ </span><span class="s1">type </span><span class="s2">-&gt;</span>
+            <span class="s1">sensorManager</span><span class="s2">.</span><span class="s1">getDefaultSensor</span><span class="s2">(</span><span class="s1">type</span><span class="s2">)</span><span class="s1">?</span><span class="s2">.</span><span class="s1">let </span><span class="s2">{ </span><span class="s1">sensor </span><span class="s2">-&gt;</span>
+                <span class="s1">sensorManager</span><span class="s2">.</span><span class="s1">registerListener</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">sensor</span><span class="s2">, </span><span class="s1">SensorManager</span><span class="s2">.</span><span class="s1">SENSOR_DELAY_NORMAL</span><span class="s2">)</span>
+                <span class="s1">activeSensors</span><span class="s2">++</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">readingsText</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s4">&quot;&quot;&quot;</span>
+            <span class="s4">🌍 Earth Connection Established</span>
+            
+            <span class="s4">Monitoring through </span><span class="s0">$</span><span class="s1">activeSensors </span><span class="s4">sensors...</span>
+            <span class="s4">Analyzing ecosystem patterns...</span>
+            
+        <span class="s4">&quot;&quot;&quot;</span><span class="s2">.</span><span class="s1">trimIndent</span><span class="s2">()</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onSensorChanged</span><span class="s2">(</span><span class="s1">event: SensorEvent</span><span class="s2">) {</span>
+        <span class="s0">val </span><span class="s1">currentTime </span><span class="s2">= </span><span class="s1">System</span><span class="s2">.</span><span class="s1">currentTimeMillis</span><span class="s2">()</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">currentTime </span><span class="s2">- </span><span class="s1">lastUpdateTime </span><span class="s2">&lt; </span><span class="s3">1000</span><span class="s2">) </span><span class="s0">return  </span><span class="s5">// Update once per second</span>
+        <span class="s1">lastUpdateTime </span><span class="s2">= </span><span class="s1">currentTime</span>
+
+        <span class="s0">val </span><span class="s1">type </span><span class="s2">= </span><span class="s1">event</span><span class="s2">.</span><span class="s1">sensor</span><span class="s2">.</span><span class="s1">type</span>
+        <span class="s0">val </span><span class="s1">value </span><span class="s2">= </span><span class="s1">event</span><span class="s2">.</span><span class="s1">values</span><span class="s2">[</span><span class="s3">0</span><span class="s2">]</span>
+        <span class="s1">sensorValues</span><span class="s2">[</span><span class="s1">type</span><span class="s2">] = </span><span class="s1">value</span>
+
+        <span class="s5">// Add reading to analyzer and get updated patterns</span>
+        <span class="s1">environmentalAnalyzer</span><span class="s2">.</span><span class="s1">addReading</span><span class="s2">(</span><span class="s1">type</span><span class="s2">, </span><span class="s1">value</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">patterns </span><span class="s2">= </span><span class="s1">environmentalAnalyzer</span><span class="s2">.</span><span class="s1">getActivePatterns</span><span class="s2">()</span>
+
+        <span class="s5">// Update WebView</span>
+        <span class="s1">webView</span><span class="s2">.</span><span class="s1">evaluateJavascript</span><span class="s2">(</span><span class="s4">&quot;&quot;&quot;</span>
+            <span class="s4">updateSensorData(</span><span class="s0">${</span><span class="s1">WebAppInterface</span><span class="s2">().</span><span class="s1">getSensorData</span><span class="s2">()</span><span class="s0">}</span><span class="s4">)</span>
+        <span class="s4">&quot;&quot;&quot;</span><span class="s2">.</span><span class="s1">trimIndent</span><span class="s2">(), </span><span class="s0">null</span><span class="s2">)</span>
+
+        <span class="s5">// Update database and UI with pattern information</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">patterns</span><span class="s2">.</span><span class="s1">isNotEmpty</span><span class="s2">()) {</span>
+            <span class="s0">val </span><span class="s1">currentPattern </span><span class="s2">= </span><span class="s1">patterns</span><span class="s2">.</span><span class="s1">first</span><span class="s2">()</span>
+
+            <span class="s1">lifecycleScope</span><span class="s2">.</span><span class="s1">launch </span><span class="s2">{</span>
+                <span class="s5">// Store reading with pattern information</span>
+                <span class="s1">database</span><span class="s2">.</span><span class="s1">sensorReadingDao</span><span class="s2">().</span><span class="s1">insert</span><span class="s2">(</span><span class="s1">SensorReading</span><span class="s2">(</span>
+                    <span class="s1">timestamp </span><span class="s2">= </span><span class="s1">currentTime</span><span class="s2">,</span>
+                    <span class="s1">nodeId </span><span class="s2">= </span><span class="s1">nodeId</span><span class="s2">,</span>
+                    <span class="s1">sensorType </span><span class="s2">= </span><span class="s1">type</span><span class="s2">,</span>
+                    <span class="s1">value </span><span class="s2">= </span><span class="s1">value</span><span class="s2">,</span>
+                    <span class="s1">condition </span><span class="s2">= </span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">type</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(),</span>
+                    <span class="s1">meaning </span><span class="s2">= </span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">description</span><span class="s2">,</span>
+                    <span class="s1">planetaryImpact </span><span class="s2">= </span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">ecosystemImpact</span><span class="s2">,</span>
+                    <span class="s1">ecosystemRole </span><span class="s2">= </span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">speciesActivity</span><span class="s2">.</span><span class="s1">joinToString</span><span class="s2">(</span><span class="s4">&quot;, &quot;</span><span class="s2">) {</span>
+                        <span class="s4">&quot;</span><span class="s0">${</span><span class="s1">it</span><span class="s2">.</span><span class="s1">species</span><span class="s0">}</span><span class="s4">: </span><span class="s0">${</span><span class="s1">it</span><span class="s2">.</span><span class="s1">activity</span><span class="s0">}</span><span class="s4">&quot;</span>
+                    <span class="s2">},</span>
+                    <span class="s1">recommendation </span><span class="s2">= </span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">recommendations</span><span class="s2">.</span><span class="s1">joinToString</span><span class="s2">(</span><span class="s4">&quot;, &quot;</span><span class="s2">)</span>
+                <span class="s2">))</span>
+
+                <span class="s5">// Update UI</span>
+                <span class="s0">val </span><span class="s1">timestamp </span><span class="s2">= </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s4">&quot;HH:mm:ss&quot;</span><span class="s2">, </span><span class="s1">Locale</span><span class="s2">.</span><span class="s1">getDefault</span><span class="s2">()).</span><span class="s1">format</span><span class="s2">(</span><span class="s1">Date</span><span class="s2">())</span>
+                <span class="s1">readingsText</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;&quot;&quot;</span>
+                    <span class="s4">═══════════════════════</span>
+                    <span class="s4">🕒 </span><span class="s0">$</span><span class="s1">timestamp</span>
+                    
+                    <span class="s4">📊 Pattern: </span><span class="s0">${</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">type</span><span class="s0">}</span>
+                    <span class="s4">Confidence: </span><span class="s0">${</span><span class="s2">(</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">confidence </span><span class="s2">* </span><span class="s3">100</span><span class="s2">).</span><span class="s1">toInt</span><span class="s2">()</span><span class="s0">}</span><span class="s4">%</span>
+                    
+                    <span class="s4">🌍 </span><span class="s0">${</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">description</span><span class="s0">}</span>
+                    <span class="s4">Impact: </span><span class="s0">${</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">ecosystemImpact</span><span class="s0">}</span>
+                    
+                    <span class="s4">🦋 Active Species:</span>
+                    <span class="s0">${</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">speciesActivity</span><span class="s2">.</span><span class="s1">joinToString</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">) {</span>
+                    <span class="s4">&quot;• </span><span class="s0">${</span><span class="s1">it</span><span class="s2">.</span><span class="s1">species</span><span class="s0">} </span><span class="s4">(</span><span class="s0">${</span><span class="s2">(</span><span class="s1">it</span><span class="s2">.</span><span class="s1">likelihood </span><span class="s2">* </span><span class="s3">100</span><span class="s2">).</span><span class="s1">toInt</span><span class="s2">()</span><span class="s0">}</span><span class="s4">%): </span><span class="s0">${</span><span class="s1">it</span><span class="s2">.</span><span class="s1">activity</span><span class="s0">}</span><span class="s4">&quot;</span>
+                <span class="s2">}</span><span class="s0">}</span>
+                    
+                    <span class="s4">💡 Recommendations:</span>
+                    <span class="s0">${</span><span class="s1">currentPattern</span><span class="s2">.</span><span class="s1">recommendations</span><span class="s2">.</span><span class="s1">joinToString</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">) { </span><span class="s4">&quot;• </span><span class="s0">$</span><span class="s1">it</span><span class="s4">&quot; </span><span class="s2">}</span><span class="s0">}</span>
+                    <span class="s4">═══════════════════════</span>
+                    
+                <span class="s4">&quot;&quot;&quot;</span><span class="s2">.</span><span class="s1">trimIndent</span><span class="s2">() + </span><span class="s4">&quot;</span><span class="s0">\n\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+
+                <span class="s1">scrollView</span><span class="s2">.</span><span class="s1">fullScroll</span><span class="s2">(</span><span class="s1">View</span><span class="s2">.</span><span class="s1">FOCUS_DOWN</span><span class="s2">)</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s5">// Update EarthPulseView with sensor data</span>
+        <span class="s1">earthPulseView</span><span class="s2">.</span><span class="s1">updatePulse</span><span class="s2">(</span><span class="s1">sensorValues</span><span class="s2">[</span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_LIGHT</span><span class="s2">] </span><span class="s1">?: </span><span class="s3">0f</span><span class="s2">, </span><span class="s1">sensorValues</span><span class="s2">[</span><span class="s1">Sensor</span><span class="s2">.</span><span class="s1">TYPE_PRESSURE</span><span class="s2">] </span><span class="s1">?: </span><span class="s3">0f</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">shareReadings</span><span class="s2">() = </span><span class="s1">lifecycleScope</span><span class="s2">.</span><span class="s1">launch </span><span class="s2">{</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">readings </span><span class="s2">= </span><span class="s1">database</span><span class="s2">.</span><span class="s1">sensorReadingDao</span><span class="s2">().</span><span class="s1">getAllReadings</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">shareText </span><span class="s2">= </span><span class="s1">buildString </span><span class="s2">{</span>
+                <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;🌍 Earth Connection Report #</span><span class="s0">$</span><span class="s1">nodeId</span><span class="s0">\n\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                <span class="s1">readings</span><span class="s2">.</span><span class="s1">take</span><span class="s2">(</span><span class="s3">10</span><span class="s2">).</span><span class="s1">forEach </span><span class="s2">{ </span><span class="s1">reading </span><span class="s2">-&gt;</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;═══════════════════════</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;Pattern: </span><span class="s0">${</span><span class="s1">reading</span><span class="s2">.</span><span class="s1">condition</span><span class="s0">}\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;Description: </span><span class="s0">${</span><span class="s1">reading</span><span class="s2">.</span><span class="s1">meaning</span><span class="s0">}\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;Impact: </span><span class="s0">${</span><span class="s1">reading</span><span class="s2">.</span><span class="s1">planetaryImpact</span><span class="s0">}\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;Species Activity: </span><span class="s0">${</span><span class="s1">reading</span><span class="s2">.</span><span class="s1">ecosystemRole</span><span class="s0">}\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;Recommendations: </span><span class="s0">${</span><span class="s1">reading</span><span class="s2">.</span><span class="s1">recommendation</span><span class="s0">}\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;═══════════════════════</span><span class="s0">\n\n</span><span class="s4">&quot;</span><span class="s2">)</span>
+                <span class="s2">}</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">readings</span><span class="s2">.</span><span class="s1">size </span><span class="s2">&gt; </span><span class="s3">10</span><span class="s2">) {</span>
+                    <span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;... and </span><span class="s0">${</span><span class="s1">readings</span><span class="s2">.</span><span class="s1">size </span><span class="s2">- </span><span class="s3">10</span><span class="s0">} </span><span class="s4">more observations&quot;</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">createChooser</span><span class="s2">(</span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">().</span><span class="s1">apply </span><span class="s2">{</span>
+                <span class="s1">action </span><span class="s2">= </span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">ACTION_SEND</span>
+                <span class="s1">type </span><span class="s2">= </span><span class="s4">&quot;text/plain&quot;</span>
+                <span class="s1">putExtra</span><span class="s2">(</span><span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span><span class="s2">.</span><span class="s1">EXTRA_TEXT</span><span class="s2">, </span><span class="s1">shareText</span><span class="s2">)</span>
+            <span class="s2">}, </span><span class="s4">&quot;Share Earth's Messages&quot;</span><span class="s2">))</span>
+        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: Exception</span><span class="s2">) {</span>
+            <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s4">&quot;MainActivity&quot;</span><span class="s2">, </span><span class="s4">&quot;Share error: </span><span class="s0">${</span><span class="s1">e</span><span class="s2">.</span><span class="s1">message</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">checkPermissions</span><span class="s2">() {</span>
+        <span class="s0">val </span><span class="s1">permissions </span><span class="s2">= </span><span class="s1">listOf</span><span class="s2">(</span>
+            <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_FINE_LOCATION</span><span class="s2">,</span>
+            <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_COARSE_LOCATION</span>
+        <span class="s2">).</span><span class="s1">filter </span><span class="s2">{</span>
+            <span class="s1">ContextCompat</span><span class="s2">.</span><span class="s1">checkSelfPermission</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">it</span><span class="s2">) != </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">permissions</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) </span><span class="s1">startSensing</span><span class="s2">()</span>
+        <span class="s0">else </span><span class="s1">ActivityCompat</span><span class="s2">.</span><span class="s1">requestPermissions</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">permissions</span><span class="s2">.</span><span class="s1">toTypedArray</span><span class="s2">(), </span><span class="s3">100</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onRequestPermissionsResult</span><span class="s2">(</span>
+        <span class="s1">requestCode: Int</span><span class="s2">,</span>
+        <span class="s1">permissions: Array</span><span class="s2">&lt;</span><span class="s1">out String</span><span class="s2">&gt;,</span>
+        <span class="s1">grantResults: IntArray</span>
+    <span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onRequestPermissionsResult</span><span class="s2">(</span><span class="s1">requestCode</span><span class="s2">, </span><span class="s1">permissions</span><span class="s2">, </span><span class="s1">grantResults</span><span class="s2">)</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">requestCode </span><span class="s2">== </span><span class="s3">100 </span><span class="s2">&amp;&amp; </span><span class="s1">grantResults</span><span class="s2">.</span><span class="s1">all </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">== </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED </span><span class="s2">}) {</span>
+            <span class="s1">startSensing</span><span class="s2">()</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onAccuracyChanged</span><span class="s2">(</span><span class="s1">sensor: Sensor?</span><span class="s2">, </span><span class="s1">accuracy: Int</span><span class="s2">) {}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onDestroy</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onDestroy</span><span class="s2">()</span>
+        <span class="s1">sensorManager</span><span class="s2">.</span><span class="s1">unregisterListener</span><span class="s2">(</span><span class="s0">this</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

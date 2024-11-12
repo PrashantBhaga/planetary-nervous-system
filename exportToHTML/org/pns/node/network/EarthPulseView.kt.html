@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>EarthPulseView.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+EarthPulseView.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Canvas</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Paint</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">AttributeSet</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Color</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">RadialGradient</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Shader</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">animation</span><span class="s2">.</span><span class="s1">ValueAnimator</span>
+
+<span class="s0">class </span><span class="s1">EarthPulseView</span><span class="s2">(</span><span class="s1">context: Context</span><span class="s2">, </span><span class="s1">attrs: AttributeSet</span><span class="s2">) </span><span class="s1">: View</span><span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s1">attrs</span><span class="s2">) {</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">earthPaint </span><span class="s2">= </span><span class="s1">Paint</span><span class="s2">().</span><span class="s1">apply </span><span class="s2">{</span>
+        <span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLUE</span>
+        <span class="s1">style </span><span class="s2">= </span><span class="s1">Paint</span><span class="s2">.</span><span class="s1">Style</span><span class="s2">.</span><span class="s1">FILL</span>
+        <span class="s1">isAntiAlias </span><span class="s2">= </span><span class="s0">true</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">pulsePaint </span><span class="s2">= </span><span class="s1">Paint</span><span class="s2">().</span><span class="s1">apply </span><span class="s2">{</span>
+        <span class="s1">color </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">GREEN</span>
+        <span class="s1">style </span><span class="s2">= </span><span class="s1">Paint</span><span class="s2">.</span><span class="s1">Style</span><span class="s2">.</span><span class="s1">FILL</span>
+        <span class="s1">isAntiAlias </span><span class="s2">= </span><span class="s0">true</span>
+    <span class="s2">}</span>
+
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">earthRadius </span><span class="s2">= </span><span class="s3">0f</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">pulseRadius </span><span class="s2">= </span><span class="s3">0f</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">pulseAmplitude </span><span class="s2">= </span><span class="s3">0f</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">lightValue </span><span class="s2">= </span><span class="s3">0f</span>
+    <span class="s1">private </span><span class="s0">var </span><span class="s1">pressureValue </span><span class="s2">= </span><span class="s3">0f</span>
+
+    <span class="s1">init </span><span class="s2">{</span>
+        <span class="s4">// Set default values</span>
+        <span class="s1">pulseAmplitude </span><span class="s2">= </span><span class="s3">20f</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">updatePulse</span><span class="s2">(</span><span class="s1">light: Float</span><span class="s2">, </span><span class="s1">pressure: Float</span><span class="s2">) {</span>
+        <span class="s1">lightValue </span><span class="s2">= </span><span class="s1">light</span>
+        <span class="s1">pressureValue </span><span class="s2">= </span><span class="s1">pressure</span>
+        <span class="s1">invalidate</span><span class="s2">() </span><span class="s4">// Force the view to redraw itself</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onSizeChanged</span><span class="s2">(</span><span class="s1">w: Int</span><span class="s2">, </span><span class="s1">h: Int</span><span class="s2">, </span><span class="s1">oldw: Int</span><span class="s2">, </span><span class="s1">oldh: Int</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onSizeChanged</span><span class="s2">(</span><span class="s1">w</span><span class="s2">, </span><span class="s1">h</span><span class="s2">, </span><span class="s1">oldw</span><span class="s2">, </span><span class="s1">oldh</span><span class="s2">)</span>
+
+        <span class="s4">// Calculate Earth radius based on the view's width</span>
+        <span class="s1">earthRadius </span><span class="s2">= (</span><span class="s1">w </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">).</span><span class="s1">toFloat</span><span class="s2">() - </span><span class="s3">10f</span>
+
+        <span class="s4">// Set up pulse animation</span>
+        <span class="s0">val </span><span class="s1">pulseAnimator </span><span class="s2">= </span><span class="s1">ValueAnimator</span><span class="s2">.</span><span class="s1">ofFloat</span><span class="s2">(</span><span class="s3">0f</span><span class="s2">, </span><span class="s3">1f</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">duration </span><span class="s2">= </span><span class="s3">1000L </span><span class="s4">// Duration in milliseconds</span>
+            <span class="s1">repeatMode </span><span class="s2">= </span><span class="s1">ValueAnimator</span><span class="s2">.</span><span class="s1">REVERSE </span><span class="s4">// Reverse animation</span>
+            <span class="s1">repeatCount </span><span class="s2">= </span><span class="s1">ValueAnimator</span><span class="s2">.</span><span class="s1">INFINITE </span><span class="s4">// Repeat indefinitely</span>
+
+            <span class="s1">addUpdateListener </span><span class="s2">{ </span><span class="s1">animator </span><span class="s2">-&gt;</span>
+                <span class="s0">val </span><span class="s1">fraction </span><span class="s2">= </span><span class="s1">animator</span><span class="s2">.</span><span class="s1">animatedFraction</span>
+                <span class="s1">pulseRadius </span><span class="s2">= </span><span class="s1">earthRadius </span><span class="s2">+ </span><span class="s1">pulseAmplitude </span><span class="s2">* </span><span class="s1">fraction </span><span class="s2">* </span><span class="s1">pressureValue </span><span class="s2">/ </span><span class="s3">1000 </span><span class="s4">// Adjust pulse radius</span>
+                <span class="s1">invalidate</span><span class="s2">()</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// Start the pulse animation</span>
+        <span class="s1">pulseAnimator</span><span class="s2">.</span><span class="s1">start</span><span class="s2">()</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onDraw</span><span class="s2">(</span><span class="s1">canvas: Canvas</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onDraw</span><span class="s2">(</span><span class="s1">canvas</span><span class="s2">)</span>
+
+        <span class="s4">// Draw the Earth</span>
+        <span class="s1">canvas</span><span class="s2">.</span><span class="s1">drawCircle</span><span class="s2">(</span><span class="s1">width </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">height </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">earthRadius</span><span class="s2">, </span><span class="s1">earthPaint</span><span class="s2">)</span>
+
+        <span class="s4">// Draw the pulsating circle</span>
+        <span class="s1">canvas</span><span class="s2">.</span><span class="s1">drawCircle</span><span class="s2">(</span><span class="s1">width </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">height </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">pulseRadius</span><span class="s2">, </span><span class="s1">pulsePaint</span><span class="s2">)</span>
+
+        <span class="s4">// Add some visual feedback based on light and pressure</span>
+        <span class="s1">pulsePaint</span><span class="s2">.</span><span class="s1">shader </span><span class="s2">= </span><span class="s1">RadialGradient</span><span class="s2">(</span>
+            <span class="s1">width </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">height </span><span class="s2">/ </span><span class="s3">2f</span><span class="s2">, </span><span class="s1">pulseRadius</span><span class="s2">,</span>
+            <span class="s1">Color</span><span class="s2">.</span><span class="s1">GREEN</span><span class="s2">, </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">YELLOW</span><span class="s2">, </span><span class="s1">Shader</span><span class="s2">.</span><span class="s1">TileMode</span><span class="s2">.</span><span class="s1">CLAMP</span>
+        <span class="s2">)</span>
+
+        <span class="s4">// Update pulse size based on pressure</span>
+        <span class="s1">pulseAmplitude </span><span class="s2">= (</span><span class="s1">pressureValue </span><span class="s2">/ </span><span class="s3">1000f</span><span class="s2">) * </span><span class="s3">20f </span><span class="s4">// Scale pulse based on pressure</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

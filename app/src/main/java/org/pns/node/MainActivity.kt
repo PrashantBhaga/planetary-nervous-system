@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var scrollView: ScrollView
     private lateinit var startButton: Button
     private lateinit var shareButton: Button
+    private lateinit var earthPulseView: EarthPulseView
 
     inner class WebAppInterface {
         @JavascriptInterface
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         scrollView = findViewById(R.id.readingsScrollView)
         startButton = findViewById(R.id.startButton)
         shareButton = findViewById(R.id.shareButton)
+        earthPulseView = findViewById(R.id.earthPulseView)
 
         findViewById<TextView>(R.id.nodeIdText).text = "Earth Connection Point #$nodeId"
 
@@ -167,6 +169,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 scrollView.fullScroll(View.FOCUS_DOWN)
             }
         }
+
+        // Update EarthPulseView with sensor data
+        earthPulseView.updatePulse(sensorValues[Sensor.TYPE_LIGHT] ?: 0f, sensorValues[Sensor.TYPE_PRESSURE] ?: 0f)
     }
 
     private fun shareReadings() = lifecycleScope.launch {
