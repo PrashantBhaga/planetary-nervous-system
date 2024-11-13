@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e843dff8767dadfe1f5a8ecabf6073f7",
+    "identityHash": "151c62635cb13b655636bf204f357ffe",
     "entities": [
       {
-        "tableName": "sensor_readings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sensorType` INTEGER NOT NULL, `value` REAL NOT NULL, `condition` TEXT NOT NULL, `meaning` TEXT NOT NULL, `planetaryImpact` TEXT NOT NULL, `nodeId` TEXT NOT NULL, `timestamp` INTEGER NOT NULL)",
+        "tableName": "planetary_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nodeId` TEXT NOT NULL, `sensorType` TEXT NOT NULL, `value` REAL NOT NULL, `condition` TEXT NOT NULL, `meaning` TEXT NOT NULL, `planetaryImpact` TEXT NOT NULL, `ecosystemRole` TEXT NOT NULL, `recommendation` TEXT NOT NULL, `type` TEXT NOT NULL, `timestamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,9 +15,15 @@
             "notNull": true
           },
           {
+            "fieldPath": "nodeId",
+            "columnName": "nodeId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "sensorType",
             "columnName": "sensorType",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -45,8 +51,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "nodeId",
-            "columnName": "nodeId",
+            "fieldPath": "ecosystemRole",
+            "columnName": "ecosystemRole",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recommendation",
+            "columnName": "recommendation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -70,7 +88,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e843dff8767dadfe1f5a8ecabf6073f7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '151c62635cb13b655636bf204f357ffe')"
     ]
   }
 }
