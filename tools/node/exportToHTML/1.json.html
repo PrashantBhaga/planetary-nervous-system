@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>1.json</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #2aacb8;}
+.s4 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+1.json</font>
+</center></td></tr></table>
+<pre><span class="s0">{</span>
+  <span class="s2">&quot;formatVersion&quot;</span><span class="s0">: </span><span class="s3">1</span><span class="s0">,</span>
+  <span class="s2">&quot;database&quot;</span><span class="s0">: {</span>
+    <span class="s2">&quot;version&quot;</span><span class="s0">: </span><span class="s3">1</span><span class="s0">,</span>
+    <span class="s2">&quot;identityHash&quot;</span><span class="s0">: </span><span class="s2">&quot;e843dff8767dadfe1f5a8ecabf6073f7&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="s0">: [</span>
+      <span class="s0">{</span>
+        <span class="s2">&quot;tableName&quot;</span><span class="s0">: </span><span class="s2">&quot;sensor_readings&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;createSql&quot;</span><span class="s0">: </span><span class="s2">&quot;CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `sensorType` INTEGER NOT NULL, `value` REAL NOT NULL, `condition` TEXT NOT NULL, `meaning` TEXT NOT NULL, `planetaryImpact` TEXT NOT NULL, `nodeId` TEXT NOT NULL, `timestamp` INTEGER NOT NULL)&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;fields&quot;</span><span class="s0">: [</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;id&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;id&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;INTEGER&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;sensorType&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;sensorType&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;INTEGER&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;value&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;value&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;REAL&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;condition&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;condition&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;TEXT&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;meaning&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;meaning&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;TEXT&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;planetaryImpact&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;planetaryImpact&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;TEXT&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;nodeId&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;nodeId&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;TEXT&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">},</span>
+          <span class="s0">{</span>
+            <span class="s2">&quot;fieldPath&quot;</span><span class="s0">: </span><span class="s2">&quot;timestamp&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;columnName&quot;</span><span class="s0">: </span><span class="s2">&quot;timestamp&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;affinity&quot;</span><span class="s0">: </span><span class="s2">&quot;INTEGER&quot;</span><span class="s0">,</span>
+            <span class="s2">&quot;notNull&quot;</span><span class="s0">: </span><span class="s4">true</span>
+          <span class="s0">}</span>
+        <span class="s0">],</span>
+        <span class="s2">&quot;primaryKey&quot;</span><span class="s0">: {</span>
+          <span class="s2">&quot;autoGenerate&quot;</span><span class="s0">: </span><span class="s4">true</span><span class="s0">,</span>
+          <span class="s2">&quot;columnNames&quot;</span><span class="s0">: [</span>
+            <span class="s2">&quot;id&quot;</span>
+          <span class="s0">]</span>
+        <span class="s0">},</span>
+        <span class="s2">&quot;indices&quot;</span><span class="s0">: [],</span>
+        <span class="s2">&quot;foreignKeys&quot;</span><span class="s0">: []</span>
+      <span class="s0">}</span>
+    <span class="s0">],</span>
+    <span class="s2">&quot;views&quot;</span><span class="s0">: [],</span>
+    <span class="s2">&quot;setupQueries&quot;</span><span class="s0">: [</span>
+      <span class="s2">&quot;CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)&quot;</span><span class="s0">,</span>
+      <span class="s2">&quot;INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e843dff8767dadfe1f5a8ecabf6073f7')&quot;</span>
+    <span class="s0">]</span>
+  <span class="s0">}</span>
+<span class="s0">}</span></pre>
+</body>
+</html>

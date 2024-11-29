@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>SensorData.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SensorData.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">room</span><span class="s2">.*</span>
+
+<span class="s1">@Entity</span><span class="s2">(</span><span class="s1">tableName </span><span class="s2">= </span><span class="s3">&quot;sensor_readings&quot;</span><span class="s2">)</span>
+<span class="s1">data </span><span class="s0">class </span><span class="s1">SensorReading</span><span class="s2">(</span>
+    <span class="s1">@PrimaryKey</span><span class="s2">(</span><span class="s1">autoGenerate </span><span class="s2">= </span><span class="s0">true</span><span class="s2">)</span>
+    <span class="s0">val </span><span class="s1">id: Long </span><span class="s2">= </span><span class="s4">0</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">sensorType: Int</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">value: Float</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">condition: String</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">meaning: String</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">planetaryImpact: String</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">ecosystemRole: String</span><span class="s2">,    </span><span class="s5">// Added this field</span>
+    <span class="s0">val </span><span class="s1">recommendation: String</span><span class="s2">,   </span><span class="s5">// Added this field</span>
+    <span class="s0">val </span><span class="s1">nodeId: String</span><span class="s2">,</span>
+    <span class="s0">val </span><span class="s1">timestamp: Long </span><span class="s2">= </span><span class="s1">System</span><span class="s2">.</span><span class="s1">currentTimeMillis</span><span class="s2">()</span>
+<span class="s2">)</span>
+
+<span class="s1">@Dao</span>
+<span class="s0">interface </span><span class="s1">SensorReadingDao </span><span class="s2">{</span>
+    <span class="s1">@Insert</span>
+    <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">insert</span><span class="s2">(</span><span class="s1">reading: SensorReading</span><span class="s2">)</span>
+
+    <span class="s1">@Query</span><span class="s2">(</span><span class="s3">&quot;SELECT * FROM sensor_readings ORDER BY timestamp DESC&quot;</span><span class="s2">)</span>
+    <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">getAllReadings</span><span class="s2">()</span><span class="s1">: List</span><span class="s2">&lt;</span><span class="s1">SensorReading</span><span class="s2">&gt;</span>
+<span class="s2">}</span>
+
+<span class="s1">@Database</span><span class="s2">(</span><span class="s1">entities </span><span class="s2">= [</span><span class="s1">SensorReading::</span><span class="s0">class</span><span class="s2">], </span><span class="s1">version </span><span class="s2">= </span><span class="s4">2</span><span class="s2">, </span><span class="s1">exportSchema </span><span class="s2">= </span><span class="s0">false</span><span class="s2">) </span><span class="s5">// Incremented version</span>
+<span class="s1">abstract </span><span class="s0">class </span><span class="s1">PlanetaryDatabase : RoomDatabase</span><span class="s2">() {</span>
+    <span class="s1">abstract </span><span class="s0">fun </span><span class="s1">sensorReadingDao</span><span class="s2">()</span><span class="s1">: SensorReadingDao</span>
+
+    <span class="s1">companion </span><span class="s0">object </span><span class="s2">{</span>
+        <span class="s1">@Volatile</span>
+        <span class="s1">private </span><span class="s0">var </span><span class="s1">INSTANCE: PlanetaryDatabase? </span><span class="s2">= </span><span class="s0">null</span>
+
+        <span class="s0">fun </span><span class="s1">getDatabase</span><span class="s2">(</span><span class="s1">context: Context</span><span class="s2">)</span><span class="s1">: PlanetaryDatabase </span><span class="s2">{</span>
+            <span class="s0">return </span><span class="s1">INSTANCE ?: synchronized</span><span class="s2">(</span><span class="s0">this</span><span class="s2">) {</span>
+                <span class="s0">val </span><span class="s1">instance </span><span class="s2">= </span><span class="s1">Room</span><span class="s2">.</span><span class="s1">databaseBuilder</span><span class="s2">(</span>
+                    <span class="s1">context</span><span class="s2">.</span><span class="s1">applicationContext</span><span class="s2">,</span>
+                    <span class="s1">PlanetaryDatabase::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">,</span>
+                    <span class="s3">&quot;planetary_database&quot;</span>
+                <span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">fallbackToDestructiveMigration</span><span class="s2">() </span><span class="s5">// Added this to handle schema changes</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">()</span>
+                <span class="s1">INSTANCE </span><span class="s2">= </span><span class="s1">instance</span>
+                <span class="s1">instance</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>PlanetaryDatabase.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PlanetaryDatabase.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">;</span>
+
+<span class="s1">@kotlin</span><span class="s2">.</span><span class="s1">Metadata</span><span class="s2">(</span><span class="s1">mv </span><span class="s2">= {</span><span class="s3">1</span><span class="s2">, </span><span class="s3">9</span><span class="s2">, </span><span class="s3">0</span><span class="s2">}, </span><span class="s1">k </span><span class="s2">= </span><span class="s3">1</span><span class="s2">, </span><span class="s1">xi </span><span class="s2">= </span><span class="s3">48</span><span class="s2">, </span><span class="s1">d1 </span><span class="s2">= {</span><span class="s4">&quot;</span><span class="s0">\u0000\u0014\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\'\u0018\u0000 \u0005</span><span class="s4">2</span><span class="s0">\u0002</span><span class="s4">0</span><span class="s0">\u0001</span><span class="s4">:</span><span class="s0">\u0001\u0005</span><span class="s4">B</span><span class="s0">\u0005\u00a2\u0006\u0002\u0010\u0002</span><span class="s4">J</span><span class="s0">\b\u0010\u0003\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0004</span><span class="s4">H&amp;</span><span class="s0">\u00a8\u0006\u0006</span><span class="s4">&quot;</span><span class="s2">}, </span><span class="s1">d2 </span><span class="s2">= {</span><span class="s4">&quot;Lorg/pns/node/data/PlanetaryDatabase;&quot;</span><span class="s2">, </span><span class="s4">&quot;Landroidx/room/RoomDatabase;&quot;</span><span class="s2">, </span><span class="s4">&quot;()V&quot;</span><span class="s2">, </span><span class="s4">&quot;sensorReadingDao&quot;</span><span class="s2">, </span><span class="s4">&quot;Lorg/pns/node/data/SensorReadingDao;&quot;</span><span class="s2">, </span><span class="s4">&quot;Companion&quot;</span><span class="s2">, </span><span class="s4">&quot;app_debug&quot;</span><span class="s2">})</span>
+<span class="s1">@androidx</span><span class="s2">.</span><span class="s1">room</span><span class="s2">.</span><span class="s1">Database</span><span class="s2">(</span><span class="s1">entities </span><span class="s2">= {</span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">SensorReading</span><span class="s2">.</span><span class="s0">class</span><span class="s2">}, </span><span class="s1">version </span><span class="s2">= </span><span class="s3">2</span><span class="s2">, </span><span class="s1">exportSchema </span><span class="s2">= </span><span class="s0">false</span><span class="s2">)</span>
+<span class="s0">public abstract class </span><span class="s1">PlanetaryDatabase </span><span class="s0">extends </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">room</span><span class="s2">.</span><span class="s1">RoomDatabase </span><span class="s2">{</span>
+    <span class="s1">@kotlin</span><span class="s2">.</span><span class="s1">jvm</span><span class="s2">.</span><span class="s1">Volatile</span><span class="s2">()</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">Nullable</span><span class="s2">()</span>
+    <span class="s0">private static volatile </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">PlanetaryDatabase INSTANCE</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public static final </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">PlanetaryDatabase</span><span class="s2">.</span><span class="s1">Companion Companion </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    
+    <span class="s0">public </span><span class="s1">PlanetaryDatabase</span><span class="s2">() {</span>
+        <span class="s0">super</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public abstract </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">SensorReadingDao sensorReadingDao</span><span class="s2">();</span>
+    
+    <span class="s1">@kotlin</span><span class="s2">.</span><span class="s1">Metadata</span><span class="s2">(</span><span class="s1">mv </span><span class="s2">= {</span><span class="s3">1</span><span class="s2">, </span><span class="s3">9</span><span class="s2">, </span><span class="s3">0</span><span class="s2">}, </span><span class="s1">k </span><span class="s2">= </span><span class="s3">1</span><span class="s2">, </span><span class="s1">xi </span><span class="s2">= </span><span class="s3">48</span><span class="s2">, </span><span class="s1">d1 </span><span class="s2">= {</span><span class="s4">&quot;</span><span class="s0">\u0000\u001a\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\b\u0086\u0003\u0018\u0000</span><span class="s4">2</span><span class="s0">\u0002</span><span class="s4">0</span><span class="s0">\u0001</span><span class="s4">B</span><span class="s0">\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002</span><span class="s4">J</span><span class="s0">\u000e\u0010\u0005\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0004</span><span class="s4">2</span><span class="s0">\u0006\u0010\u0006\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0007</span><span class="s4">R</span><span class="s0">\u0010\u0010\u0003\u001a\u0004\u0018\u0001</span><span class="s4">0</span><span class="s0">\u0004</span><span class="s4">X</span><span class="s0">\u0082\u000e\u00a2\u0006\u0002\n\u0000\u00a8\u0006\b</span><span class="s4">&quot;</span><span class="s2">}, </span><span class="s1">d2 </span><span class="s2">= {</span><span class="s4">&quot;Lorg/pns/node/data/PlanetaryDatabase$Companion;&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;()V&quot;</span><span class="s2">, </span><span class="s4">&quot;INSTANCE&quot;</span><span class="s2">, </span><span class="s4">&quot;Lorg/pns/node/data/PlanetaryDatabase;&quot;</span><span class="s2">, </span><span class="s4">&quot;getDatabase&quot;</span><span class="s2">, </span><span class="s4">&quot;context&quot;</span><span class="s2">, </span><span class="s4">&quot;Landroid/content/Context;&quot;</span><span class="s2">, </span><span class="s4">&quot;app_debug&quot;</span><span class="s2">})</span>
+    <span class="s0">public static final class </span><span class="s1">Companion </span><span class="s2">{</span>
+        
+        <span class="s0">private </span><span class="s1">Companion</span><span class="s2">() {</span>
+            <span class="s0">super</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        
+        <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+        <span class="s0">public final </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">PlanetaryDatabase getDatabase</span><span class="s2">(</span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+        <span class="s1">android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context context</span><span class="s2">) {</span>
+            <span class="s0">return null</span><span class="s2">;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

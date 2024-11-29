@@ -1,0 +1,173 @@
+<html>
+<head>
+<title>SensorReading.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SensorReading.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">;</span>
+
+<span class="s1">@kotlin</span><span class="s2">.</span><span class="s1">Metadata</span><span class="s2">(</span><span class="s1">mv </span><span class="s2">= {</span><span class="s3">1</span><span class="s2">, </span><span class="s3">9</span><span class="s2">, </span><span class="s3">0</span><span class="s2">}, </span><span class="s1">k </span><span class="s2">= </span><span class="s3">1</span><span class="s2">, </span><span class="s1">xi </span><span class="s2">= </span><span class="s3">48</span><span class="s2">, </span><span class="s1">d1 </span><span class="s2">= {</span><span class="s4">&quot;</span><span class="s0">\u0000</span><span class="s4">,</span><span class="s0">\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\t\n\u0000\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u0007\n\u0000\n\u0002\u0010\u000e\n\u0002\b</span><span class="s4">!</span><span class="s0">\n\u0002\u0010\u000b\n\u0002\b\u0004\b\u0087\b\u0018\u0000</span><span class="s4">2</span><span class="s0">\u0002</span><span class="s4">0</span><span class="s0">\u0001</span><span class="s4">BY</span><span class="s0">\u0012\b\b\u0002\u0010\u0002\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003\u0012\u0006\u0010\u0004\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0005\u0012\u0006\u0010\u0006\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0007\u0012\u0006\u0010\b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\u0006\u0010\n\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\u0006\u0010\u000b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\u0006\u0010\f\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\u0006\u0010\r\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\u0006\u0010\u000e\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u0012\b\b\u0002\u0010\u000f\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003\u00a2\u0006\u0002\u0010\u0010</span><span class="s4">J</span><span class="s0">\t\u0010\u001f\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010 \u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">!</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0005</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010\&quot;\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0007</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">#</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">$</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">%</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">&amp;</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010\'\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">(</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00c6\u0003</span><span class="s4">Jm</span><span class="s0">\u0010</span><span class="s4">)</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0000</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u0002\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u0004\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0005</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u0006\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0007</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\n\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u000b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\f\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\r\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u000e\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">2</span><span class="s0">\b\b\u0002\u0010\u000f\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003</span><span class="s4">H</span><span class="s0">\u00c6\u0001</span><span class="s4">J</span><span class="s0">\u0013\u0010</span><span class="s4">*</span><span class="s0">\u001a\u0002</span><span class="s4">0+2</span><span class="s0">\b\u0010</span><span class="s4">,</span><span class="s0">\u001a\u0004\u0018\u0001</span><span class="s4">0</span><span class="s0">\u0001</span><span class="s4">H</span><span class="s0">\u00d6\u0003</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">-</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0005</span><span class="s4">H</span><span class="s0">\u00d6\u0001</span><span class="s4">J</span><span class="s0">\t\u0010</span><span class="s4">.</span><span class="s0">\u001a\u0002</span><span class="s4">0</span><span class="s0">\t</span><span class="s4">H</span><span class="s0">\u00d6\u0001</span><span class="s4">R</span><span class="s0">\u0011\u0010\b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0011\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0011\u0010\f\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0013\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0016\u0010\u0002\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003</span><span class="s4">8</span><span class="s0">\u0006</span><span class="s4">X</span><span class="s0">\u0087\u0004\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0014\u0010\u0015</span><span class="s4">R</span><span class="s0">\u0011\u0010\n\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0016\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0011\u0010\u000e\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0017\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0011\u0010\u000b\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0018\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0011\u0010\r\u001a\u0002</span><span class="s4">0</span><span class="s0">\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0019\u0010\u0012</span><span class="s4">R</span><span class="s0">\u0011\u0010\u0004\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0005\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001a\u0010\u001b</span><span class="s4">R</span><span class="s0">\u0011\u0010\u000f\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001c\u0010\u0015</span><span class="s4">R</span><span class="s0">\u0011\u0010\u0006\u001a\u0002</span><span class="s4">0</span><span class="s0">\u0007\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001d\u0010\u001e\u00a8\u0006</span><span class="s4">/&quot;</span><span class="s2">}, </span><span class="s1">d2 </span><span class="s2">= {</span><span class="s4">&quot;Lorg/pns/node/data/SensorReading;&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;id&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;sensorType&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;value&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;condition&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;meaning&quot;</span><span class="s2">, </span><span class="s4">&quot;planetaryImpact&quot;</span><span class="s2">, </span><span class="s4">&quot;ecosystemRole&quot;</span><span class="s2">, </span><span class="s4">&quot;recommendation&quot;</span><span class="s2">, </span><span class="s4">&quot;nodeId&quot;</span><span class="s2">, </span><span class="s4">&quot;timestamp&quot;</span><span class="s2">, </span><span class="s4">&quot;(JIFLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V&quot;</span><span class="s2">, </span><span class="s4">&quot;getCondition&quot;</span><span class="s2">, </span><span class="s4">&quot;()Ljava/lang/String;&quot;</span><span class="s2">, </span><span class="s4">&quot;getEcosystemRole&quot;</span><span class="s2">, </span><span class="s4">&quot;getId&quot;</span><span class="s2">, </span><span class="s4">&quot;()J&quot;</span><span class="s2">, </span><span class="s4">&quot;getMeaning&quot;</span><span class="s2">, </span><span class="s4">&quot;getNodeId&quot;</span><span class="s2">, </span><span class="s4">&quot;getPlanetaryImpact&quot;</span><span class="s2">, </span><span class="s4">&quot;getRecommendation&quot;</span><span class="s2">, </span><span class="s4">&quot;getSensorType&quot;</span><span class="s2">, </span><span class="s4">&quot;()I&quot;</span><span class="s2">, </span><span class="s4">&quot;getTimestamp&quot;</span><span class="s2">, </span><span class="s4">&quot;getValue&quot;</span><span class="s2">, </span><span class="s4">&quot;()F&quot;</span><span class="s2">, </span><span class="s4">&quot;component1&quot;</span><span class="s2">, </span><span class="s4">&quot;component10&quot;</span><span class="s2">, </span><span class="s4">&quot;component2&quot;</span><span class="s2">, </span><span class="s4">&quot;component3&quot;</span><span class="s2">, </span><span class="s4">&quot;component4&quot;</span><span class="s2">, </span><span class="s4">&quot;component5&quot;</span><span class="s2">, </span><span class="s4">&quot;component6&quot;</span><span class="s2">, </span><span class="s4">&quot;component7&quot;</span><span class="s2">, </span><span class="s4">&quot;component8&quot;</span><span class="s2">, </span><span class="s4">&quot;component9&quot;</span><span class="s2">, </span><span class="s4">&quot;copy&quot;</span><span class="s2">, </span><span class="s4">&quot;equals&quot;</span><span class="s2">, </span><span class="s4">&quot;&quot;</span><span class="s2">, </span><span class="s4">&quot;other&quot;</span><span class="s2">, </span><span class="s4">&quot;hashCode&quot;</span><span class="s2">, </span><span class="s4">&quot;toString&quot;</span><span class="s2">, </span><span class="s4">&quot;app_debug&quot;</span><span class="s2">})</span>
+<span class="s1">@androidx</span><span class="s2">.</span><span class="s1">room</span><span class="s2">.</span><span class="s1">Entity</span><span class="s2">(</span><span class="s1">tableName </span><span class="s2">= </span><span class="s4">&quot;sensor_readings&quot;</span><span class="s2">)</span>
+<span class="s0">public final class </span><span class="s1">SensorReading </span><span class="s2">{</span>
+    <span class="s1">@androidx</span><span class="s2">.</span><span class="s1">room</span><span class="s2">.</span><span class="s1">PrimaryKey</span><span class="s2">(</span><span class="s1">autoGenerate </span><span class="s2">= </span><span class="s0">true</span><span class="s2">)</span>
+    <span class="s0">private final long </span><span class="s1">id </span><span class="s2">= </span><span class="s3">0L</span><span class="s2">;</span>
+    <span class="s0">private final int </span><span class="s1">sensorType </span><span class="s2">= </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s0">private final float </span><span class="s1">value </span><span class="s2">= </span><span class="s3">0.0F</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String condition </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String meaning </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String planetaryImpact </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String ecosystemRole </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String recommendation </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">private final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String nodeId </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+    <span class="s0">private final long </span><span class="s1">timestamp </span><span class="s2">= </span><span class="s3">0L</span><span class="s2">;</span>
+    
+    <span class="s0">public </span><span class="s1">SensorReading</span><span class="s2">(</span><span class="s0">long </span><span class="s1">id</span><span class="s2">, </span><span class="s0">int </span><span class="s1">sensorType</span><span class="s2">, </span><span class="s0">float </span><span class="s1">value</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String condition</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String meaning</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String planetaryImpact</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String ecosystemRole</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String recommendation</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String nodeId</span><span class="s2">, </span><span class="s0">long </span><span class="s1">timestamp</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">();</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final long </span><span class="s1">getId</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0L</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final int </span><span class="s1">getSensorType</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final float </span><span class="s1">getValue</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0.0F</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getCondition</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getMeaning</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getPlanetaryImpact</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getEcosystemRole</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getRecommendation</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String getNodeId</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final long </span><span class="s1">getTimestamp</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0L</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final long </span><span class="s1">component1</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0L</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final long </span><span class="s1">component10</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0L</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final int </span><span class="s1">component2</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s0">public final float </span><span class="s1">component3</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0.0F</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component4</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component5</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component6</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component7</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component8</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String component9</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public final </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">.</span><span class="s1">SensorReading copy</span><span class="s2">(</span><span class="s0">long </span><span class="s1">id</span><span class="s2">, </span><span class="s0">int </span><span class="s1">sensorType</span><span class="s2">, </span><span class="s0">float </span><span class="s1">value</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String condition</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String meaning</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String planetaryImpact</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String ecosystemRole</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String recommendation</span><span class="s2">, </span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String nodeId</span><span class="s2">, </span><span class="s0">long </span><span class="s1">timestamp</span><span class="s2">) {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">Override</span><span class="s2">()</span>
+    <span class="s0">public boolean </span><span class="s1">equals</span><span class="s2">(</span><span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">Nullable</span><span class="s2">()</span>
+    <span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">Object other</span><span class="s2">) {</span>
+        <span class="s0">return false</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">Override</span><span class="s2">()</span>
+    <span class="s0">public int </span><span class="s1">hashCode</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    
+    <span class="s1">@java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">Override</span><span class="s2">()</span>
+    <span class="s1">@org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">annotations</span><span class="s2">.</span><span class="s1">NotNull</span><span class="s2">()</span>
+    <span class="s0">public </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

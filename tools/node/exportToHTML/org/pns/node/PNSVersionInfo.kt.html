@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>PNSVersionInfo.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PNSVersionInfo.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span>
+
+<span class="s0">object </span><span class="s1">PNSVersionInfo </span><span class="s2">{</span>
+    <span class="s1">const </span><span class="s0">val </span><span class="s1">MAJOR_VERSION </span><span class="s2">= </span><span class="s3">0</span>
+    <span class="s1">const </span><span class="s0">val </span><span class="s1">MINOR_VERSION </span><span class="s2">= </span><span class="s3">2</span>
+    <span class="s1">const </span><span class="s0">val </span><span class="s1">PATCH_VERSION </span><span class="s2">= </span><span class="s3">0</span>
+
+    <span class="s1">enum </span><span class="s0">class </span><span class="s1">Phase </span><span class="s2">{</span>
+        <span class="s1">BASIC_SENSING</span><span class="s2">,</span>
+        <span class="s1">EARTH_CONNECTION</span><span class="s2">,</span>
+        <span class="s1">FOREST_NETWORK</span><span class="s2">,</span>
+        <span class="s1">HEALING_PROTOCOLS</span>
+    <span class="s2">}</span>
+
+    <span class="s1">data </span><span class="s0">class </span><span class="s1">FeatureState</span><span class="s2">(</span>
+        <span class="s0">val </span><span class="s1">implemented: Boolean </span><span class="s2">= </span><span class="s0">false</span><span class="s2">,</span>
+        <span class="s0">val </span><span class="s1">version: String </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">,</span>
+        <span class="s0">val </span><span class="s1">notes: String </span><span class="s2">= </span><span class="s4">&quot;&quot;</span>
+    <span class="s2">)</span>
+
+    <span class="s0">val </span><span class="s1">features </span><span class="s2">= </span><span class="s1">mapOf</span><span class="s2">(</span>
+        <span class="s4">&quot;basic_sensors&quot; </span><span class="s1">to FeatureState</span><span class="s2">(</span>
+            <span class="s1">implemented </span><span class="s2">= </span><span class="s0">true</span><span class="s2">,</span>
+            <span class="s1">version </span><span class="s2">= </span><span class="s4">&quot;0.1.0&quot;</span><span class="s2">,</span>
+            <span class="s1">notes </span><span class="s2">= </span><span class="s4">&quot;Initial sensor setup with basic readings&quot;</span>
+        <span class="s2">),</span>
+        <span class="s4">&quot;planetary_interpretation&quot; </span><span class="s1">to FeatureState</span><span class="s2">(</span>
+            <span class="s1">implemented </span><span class="s2">= </span><span class="s0">true</span><span class="s2">,</span>
+            <span class="s1">version </span><span class="s2">= </span><span class="s4">&quot;0.2.0&quot;</span><span class="s2">,</span>
+            <span class="s1">notes </span><span class="s2">= </span><span class="s4">&quot;Enhanced readings with Earth connection metaphors&quot;</span>
+        <span class="s2">),</span>
+        <span class="s4">&quot;visualization&quot; </span><span class="s1">to FeatureState</span><span class="s2">(</span>
+            <span class="s1">implemented </span><span class="s2">= </span><span class="s0">false</span><span class="s2">,</span>
+            <span class="s1">version </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">,</span>
+            <span class="s1">notes </span><span class="s2">= </span><span class="s4">&quot;Pending implementation&quot;</span>
+        <span class="s2">),</span>
+        <span class="s4">&quot;node_communication&quot; </span><span class="s1">to FeatureState</span><span class="s2">(</span>
+            <span class="s1">implemented </span><span class="s2">= </span><span class="s0">false</span><span class="s2">,</span>
+            <span class="s1">version </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">,</span>
+            <span class="s1">notes </span><span class="s2">= </span><span class="s4">&quot;Planned for Forest Network phase&quot;</span>
+        <span class="s2">),</span>
+        <span class="s4">&quot;healing_protocols&quot; </span><span class="s1">to FeatureState</span><span class="s2">(</span>
+            <span class="s1">implemented </span><span class="s2">= </span><span class="s0">false</span><span class="s2">,</span>
+            <span class="s1">version </span><span class="s2">= </span><span class="s4">&quot;&quot;</span><span class="s2">,</span>
+            <span class="s1">notes </span><span class="s2">= </span><span class="s4">&quot;Final phase implementation&quot;</span>
+        <span class="s2">)</span>
+    <span class="s2">)</span>
+
+    <span class="s0">fun </span><span class="s1">getCurrentVersion</span><span class="s2">() = </span><span class="s4">&quot;</span><span class="s0">$</span><span class="s1">MAJOR_VERSION</span><span class="s4">.</span><span class="s0">$</span><span class="s1">MINOR_VERSION</span><span class="s4">.</span><span class="s0">$</span><span class="s1">PATCH_VERSION</span><span class="s4">&quot;</span>
+
+    <span class="s0">fun </span><span class="s1">getFeatureStatus</span><span class="s2">()</span><span class="s1">: String </span><span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">buildString </span><span class="s2">{</span>
+            <span class="s1">appendLine</span><span class="s2">(</span><span class="s4">&quot;PNS Node Version </span><span class="s0">${</span><span class="s1">getCurrentVersion</span><span class="s2">()</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
+            <span class="s1">appendLine</span><span class="s2">(</span><span class="s4">&quot;Implementation Status:&quot;</span><span class="s2">)</span>
+            <span class="s1">features</span><span class="s2">.</span><span class="s1">forEach </span><span class="s2">{ (</span><span class="s1">feature</span><span class="s2">, </span><span class="s1">state</span><span class="s2">) -&gt;</span>
+                <span class="s1">appendLine</span><span class="s2">(</span><span class="s4">&quot;- </span><span class="s0">$</span><span class="s1">feature</span><span class="s4">: </span><span class="s0">${if </span><span class="s2">(</span><span class="s1">state</span><span class="s2">.</span><span class="s1">implemented</span><span class="s2">) </span><span class="s4">&quot;✓&quot; </span><span class="s0">else </span><span class="s4">&quot;⧖&quot;</span><span class="s0">} ${</span><span class="s1">state</span><span class="s2">.</span><span class="s1">version</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">state</span><span class="s2">.</span><span class="s1">notes</span><span class="s2">.</span><span class="s1">isNotEmpty</span><span class="s2">()) {</span>
+                    <span class="s1">appendLine</span><span class="s2">(</span><span class="s4">&quot;  Notes: </span><span class="s0">${</span><span class="s1">state</span><span class="s2">.</span><span class="s1">notes</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
