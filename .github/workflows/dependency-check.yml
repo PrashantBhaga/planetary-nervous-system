@@ -1,0 +1,35 @@
+name: "Dependency Analysis"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'PNS'
+          path: '.'
+          format: 'HTML'
+          
+      - name: Upload Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Dependency Check Report
+          path: reports/dependency-check-report.html
