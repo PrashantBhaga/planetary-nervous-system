@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>pulse.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d5b778;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bababa;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+pulse.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">name</span><span class="s3">=&quot;viewport&quot; </span><span class="s2">content</span><span class="s3">=&quot;width=device-width, initial-scale=1.0&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s1">Earth Pulse</span><span class="s0">&lt;/title&gt;</span>
+    <span class="s0">&lt;script </span><span class="s2">src</span><span class="s3">=&quot;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js&quot;</span><span class="s0">&gt;&lt;/script&gt;</span>
+    <span class="s0">&lt;style&gt;</span>
+        <span class="s1">body {</span>
+            <span class="s1">margin: 0;</span>
+            <span class="s1">padding: 16px;</span>
+            <span class="s1">font-family: system-ui, -apple-system, sans-serif;</span>
+            <span class="s1">background: #f8faf9;</span>
+        <span class="s1">}</span>
+        <span class="s1">.dashboard {</span>
+            <span class="s1">background: white;</span>
+            <span class="s1">border-radius: 12px;</span>
+            <span class="s1">padding: 16px;</span>
+            <span class="s1">box-shadow: 0 2px 4px rgba(0,0,0,0.1);</span>
+        <span class="s1">}</span>
+        <span class="s1">.metrics {</span>
+            <span class="s1">display: grid;</span>
+            <span class="s1">grid-template-columns: 1fr 1fr;</span>
+            <span class="s1">gap: 16px;</span>
+            <span class="s1">margin-bottom: 16px;</span>
+        <span class="s1">}</span>
+        <span class="s1">.metric-card {</span>
+            <span class="s1">padding: 16px;</span>
+            <span class="s1">border-radius: 8px;</span>
+            <span class="s1">color: #1a472a;</span>
+        <span class="s1">}</span>
+        <span class="s1">.light-card {</span>
+            <span class="s1">background: #ecfdf5;</span>
+        <span class="s1">}</span>
+        <span class="s1">.pressure-card {</span>
+            <span class="s1">background: #eff6ff;</span>
+            <span class="s1">color: #1e3a8a;</span>
+        <span class="s1">}</span>
+        <span class="s1">.metric-title {</span>
+            <span class="s1">font-size: 14px;</span>
+            <span class="s1">font-weight: 600;</span>
+            <span class="s1">margin-bottom: 8px;</span>
+        <span class="s1">}</span>
+        <span class="s1">.metric-value {</span>
+            <span class="s1">font-size: 24px;</span>
+            <span class="s1">font-weight: bold;</span>
+        <span class="s1">}</span>
+        <span class="s1">.metric-status {</span>
+            <span class="s1">font-size: 12px;</span>
+            <span class="s1">margin-top: 4px;</span>
+        <span class="s1">}</span>
+        <span class="s1">.pulse-indicator {</span>
+            <span class="s1">width: 12px;</span>
+            <span class="s1">height: 12px;</span>
+            <span class="s1">border-radius: 50%;</span>
+            <span class="s1">background: #22c55e;</span>
+            <span class="s1">display: inline-block;</span>
+            <span class="s1">margin-right: 8px;</span>
+            <span class="s1">animation: pulse 2s infinite;</span>
+        <span class="s1">}</span>
+        <span class="s1">@keyframes pulse {</span>
+            <span class="s1">0% { transform: scale(0.95); opacity: 0.5; }</span>
+            <span class="s1">50% { transform: scale(1.05); opacity: 0.8; }</span>
+            <span class="s1">100% { transform: scale(0.95); opacity: 0.5; }</span>
+        <span class="s1">}</span>
+    <span class="s0">&lt;/style&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;dashboard&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;metrics&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;metric-card light-card&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;metric-title&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;pulse-indicator&quot;</span><span class="s0">&gt;&lt;/span&gt;</span>
+                <span class="s1">Light Energy</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;lightValue&quot; </span><span class="s2">class</span><span class="s3">=&quot;metric-value&quot;</span><span class="s0">&gt;</span><span class="s1">-</span><span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;lightStatus&quot; </span><span class="s2">class</span><span class="s3">=&quot;metric-status&quot;</span><span class="s0">&gt;&lt;/div&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;metric-card pressure-card&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;metric-title&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;pulse-indicator&quot; </span><span class="s2">style</span><span class="s3">=&quot;background: #3b82f6&quot;</span><span class="s0">&gt;&lt;/span&gt;</span>
+                <span class="s1">Atmospheric Pressure</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;pressureValue&quot; </span><span class="s2">class</span><span class="s3">=&quot;metric-value&quot;</span><span class="s0">&gt;</span><span class="s1">-</span><span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;pressureStatus&quot; </span><span class="s2">class</span><span class="s3">=&quot;metric-status&quot;</span><span class="s0">&gt;&lt;/div&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;canvas </span><span class="s2">id</span><span class="s3">=&quot;pulseChart&quot;</span><span class="s0">&gt;&lt;/canvas&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+
+<span class="s0">&lt;script&gt;</span>
+    <span class="s1">const ctx = document.getElementById('pulseChart').getContext('2d');</span>
+    <span class="s1">const maxDataPoints = 20;</span>
+    <span class="s1">const chart = new Chart(ctx, {</span>
+        <span class="s1">type: 'line',</span>
+        <span class="s1">data: {</span>
+            <span class="s1">labels: [],</span>
+            <span class="s1">datasets: [{</span>
+                <span class="s1">label: 'Light (lux)',</span>
+                <span class="s1">borderColor: '#22c55e',</span>
+                <span class="s1">data: [],</span>
+                <span class="s1">yAxisID: 'y-light',</span>
+            <span class="s1">}, {</span>
+                <span class="s1">label: 'Pressure (hPa)',</span>
+                <span class="s1">borderColor: '#3b82f6',</span>
+                <span class="s1">data: [],</span>
+                <span class="s1">yAxisID: 'y-pressure',</span>
+            <span class="s1">}]</span>
+        <span class="s1">},</span>
+        <span class="s1">options: {</span>
+            <span class="s1">responsive: true,</span>
+            <span class="s1">interaction: {</span>
+                <span class="s1">intersect: false,</span>
+                <span class="s1">mode: 'index'</span>
+            <span class="s1">},</span>
+            <span class="s1">scales: {</span>
+                <span class="s1">'y-light': {</span>
+                    <span class="s1">type: 'linear',</span>
+                    <span class="s1">position: 'left',</span>
+                    <span class="s1">title: {</span>
+                        <span class="s1">display: true,</span>
+                        <span class="s1">text: 'Light (lux)'</span>
+                    <span class="s1">},</span>
+                    <span class="s1">grid: {</span>
+                        <span class="s1">color: '#22c55e22'</span>
+                    <span class="s1">}</span>
+                <span class="s1">},</span>
+                <span class="s1">'y-pressure': {</span>
+                    <span class="s1">type: 'linear',</span>
+                    <span class="s1">position: 'right',</span>
+                    <span class="s1">title: {</span>
+                        <span class="s1">display: true,</span>
+                        <span class="s1">text: 'Pressure (hPa)'</span>
+                    <span class="s1">},</span>
+                    <span class="s1">grid: {</span>
+                        <span class="s1">color: '#3b82f622'</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">});</span>
+
+    <span class="s1">function interpretLight(value) {</span>
+        <span class="s1">if (value &lt; 100) return &quot;Night/Deep Shade - Earth's Rest Period&quot;;</span>
+        <span class="s1">if (value &lt; 1000) return &quot;Dawn/Dusk - Transition Period&quot;;</span>
+        <span class="s1">return &quot;Daylight - Active Energy Period&quot;;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">function interpretPressure(value) {</span>
+        <span class="s1">if (value &lt; 980) return &quot;Low Pressure - Weather System Approaching&quot;;</span>
+        <span class="s1">if (value &lt; 1020) return &quot;Stable Atmospheric Conditions&quot;;</span>
+        <span class="s1">return &quot;High Pressure - Clear Weather System&quot;;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">function updateSensorData(data) {</span>
+        <span class="s1">// Update current values</span>
+        <span class="s1">document.getElementById('lightValue').textContent = `${data.light.toFixed(1)} lux`;</span>
+        <span class="s1">document.getElementById('pressureValue').textContent = `${data.pressure.toFixed(1)} hPa`;</span>
+
+        <span class="s1">document.getElementById('lightStatus').textContent = interpretLight(data.light);</span>
+        <span class="s1">document.getElementById('pressureStatus').textContent = interpretPressure(data.pressure);</span>
+
+        <span class="s1">// Update chart</span>
+        <span class="s1">const now = new Date().toLocaleTimeString();</span>
+        <span class="s1">chart.data.labels.push(now);</span>
+        <span class="s1">chart.data.datasets[0].data.push(data.light);</span>
+        <span class="s1">chart.data.datasets[1].data.push(data.pressure);</span>
+
+        <span class="s1">// Keep only last maxDataPoints</span>
+        <span class="s1">if (chart.data.labels.length &gt; maxDataPoints) {</span>
+            <span class="s1">chart.data.labels.shift();</span>
+            <span class="s1">chart.data.datasets.forEach(dataset =&gt; dataset.data.shift());</span>
+        <span class="s1">}</span>
+
+        <span class="s1">chart.update();</span>
+    <span class="s1">}</span>
+<span class="s0">&lt;/script&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>

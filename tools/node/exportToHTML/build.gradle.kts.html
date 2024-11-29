@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>build.gradle.kts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #cf8e6d;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+build.gradle.kts</font>
+</center></td></tr></table>
+<pre><span class="s0">plugins </span><span class="s1">{</span>
+    <span class="s0">id</span><span class="s1">(</span><span class="s2">&quot;com.android.application&quot;</span><span class="s1">)</span>
+    <span class="s0">id</span><span class="s1">(</span><span class="s2">&quot;org.jetbrains.kotlin.android&quot;</span><span class="s1">)</span>
+    <span class="s0">id</span><span class="s1">(</span><span class="s2">&quot;kotlin-kapt&quot;</span><span class="s1">)</span>
+<span class="s1">}</span>
+
+<span class="s0">android </span><span class="s1">{</span>
+    <span class="s0">namespace </span><span class="s1">= </span><span class="s2">&quot;org.pns.node&quot;</span>
+    <span class="s0">compileSdk </span><span class="s1">= </span><span class="s3">34</span>
+
+    <span class="s0">defaultConfig </span><span class="s1">{</span>
+        <span class="s0">applicationId </span><span class="s1">= </span><span class="s2">&quot;org.pns.node&quot;</span>
+        <span class="s0">minSdk </span><span class="s1">= </span><span class="s3">24</span>
+        <span class="s0">targetSdk </span><span class="s1">= </span><span class="s3">34</span>
+        <span class="s0">versionCode </span><span class="s1">= </span><span class="s3">1</span>
+        <span class="s0">versionName </span><span class="s1">= </span><span class="s2">&quot;1.0&quot;</span>
+
+        <span class="s0">testInstrumentationRunner </span><span class="s1">= </span><span class="s2">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+
+        <span class="s4">// Add Room schema location</span>
+        <span class="s0">javaCompileOptions </span><span class="s1">{</span>
+            <span class="s0">annotationProcessorOptions </span><span class="s1">{</span>
+                <span class="s0">arguments </span><span class="s1">+= </span><span class="s0">mapOf</span><span class="s1">(</span>
+                    <span class="s2">&quot;room.schemaLocation&quot; </span><span class="s0">to </span><span class="s2">&quot;</span><span class="s5">$</span><span class="s0">projectDir</span><span class="s2">/schemas&quot;</span><span class="s1">,</span>
+                    <span class="s2">&quot;room.incremental&quot; </span><span class="s0">to </span><span class="s2">&quot;true&quot;</span>
+                <span class="s1">)</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">buildTypes </span><span class="s1">{</span>
+        <span class="s0">release </span><span class="s1">{</span>
+            <span class="s0">isMinifyEnabled </span><span class="s1">= </span><span class="s5">false</span>
+            <span class="s0">proguardFiles</span><span class="s1">(</span>
+                <span class="s0">getDefaultProguardFile</span><span class="s1">(</span><span class="s2">&quot;proguard-android-optimize.txt&quot;</span><span class="s1">),</span>
+                <span class="s2">&quot;proguard-rules.pro&quot;</span>
+            <span class="s1">)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s4">// Add viewBinding support</span>
+    <span class="s0">buildFeatures </span><span class="s1">{</span>
+        <span class="s0">viewBinding </span><span class="s1">= </span><span class="s5">true</span>
+    <span class="s1">}</span>
+
+    <span class="s0">compileOptions </span><span class="s1">{</span>
+        <span class="s0">sourceCompatibility </span><span class="s1">= </span><span class="s0">JavaVersion</span><span class="s1">.</span><span class="s0">VERSION_17</span>
+        <span class="s0">targetCompatibility </span><span class="s1">= </span><span class="s0">JavaVersion</span><span class="s1">.</span><span class="s0">VERSION_17</span>
+    <span class="s1">}</span>
+
+    <span class="s0">kotlinOptions </span><span class="s1">{</span>
+        <span class="s0">jvmTarget </span><span class="s1">= </span><span class="s2">&quot;17&quot;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">dependencies </span><span class="s1">{</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.core:core-ktx:1.12.0&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.appcompat:appcompat:1.6.1&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;com.google.android.material:material:1.11.0&quot;</span><span class="s1">)  </span><span class="s4">// Updated to latest</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.constraintlayout:constraintlayout:2.1.4&quot;</span><span class="s1">)</span>
+
+    <span class="s4">// Activity KTX for viewModels()</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.activity:activity-ktx:1.8.2&quot;</span><span class="s1">)</span>
+
+    <span class="s4">// Room components</span>
+    <span class="s5">val </span><span class="s0">roomVersion </span><span class="s1">= </span><span class="s2">&quot;2.6.1&quot;</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.room:room-runtime:</span><span class="s5">$</span><span class="s0">roomVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.room:room-ktx:</span><span class="s5">$</span><span class="s0">roomVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+    <span class="s0">kapt</span><span class="s1">(</span><span class="s2">&quot;androidx.room:room-compiler:</span><span class="s5">$</span><span class="s0">roomVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+
+    <span class="s4">// Lifecycle components</span>
+    <span class="s5">val </span><span class="s0">lifecycleVersion </span><span class="s1">= </span><span class="s2">&quot;2.7.0&quot;  </span><span class="s4">// Updated to latest</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.lifecycle:lifecycle-runtime-ktx:</span><span class="s5">$</span><span class="s0">lifecycleVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.lifecycle:lifecycle-viewmodel-ktx:</span><span class="s5">$</span><span class="s0">lifecycleVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.lifecycle:lifecycle-livedata-ktx:</span><span class="s5">$</span><span class="s0">lifecycleVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+
+    <span class="s4">// Coroutines</span>
+    <span class="s5">val </span><span class="s0">coroutinesVersion </span><span class="s1">= </span><span class="s2">&quot;1.7.3&quot;</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:</span><span class="s5">$</span><span class="s0">coroutinesVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;org.jetbrains.kotlinx:kotlinx-coroutines-core:</span><span class="s5">$</span><span class="s0">coroutinesVersion</span><span class="s2">&quot;</span><span class="s1">)</span>
+
+    <span class="s4">// WebView support</span>
+    <span class="s0">implementation</span><span class="s1">(</span><span class="s2">&quot;androidx.webkit:webkit:1.8.0&quot;</span><span class="s1">)</span>
+
+    <span class="s0">testImplementation</span><span class="s1">(</span><span class="s2">&quot;junit:junit:4.13.2&quot;</span><span class="s1">)</span>
+    <span class="s0">androidTestImplementation</span><span class="s1">(</span><span class="s2">&quot;androidx.test.ext:junit:1.1.5&quot;</span><span class="s1">)</span>
+    <span class="s0">androidTestImplementation</span><span class="s1">(</span><span class="s2">&quot;androidx.test.espresso:espresso-core:3.5.1&quot;</span><span class="s1">)</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

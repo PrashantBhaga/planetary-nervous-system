@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>ExampleInstrumentedTest.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #5f826b; font-style: italic;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ExampleInstrumentedTest.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">pns</span><span class="s2">.</span><span class="s1">node</span>
+
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">test</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">InstrumentationRegistry</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">test</span><span class="s2">.</span><span class="s1">ext</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">runners</span><span class="s2">.</span><span class="s1">AndroidJUnit4</span>
+
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">Test</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">runner</span><span class="s2">.</span><span class="s1">RunWith</span>
+
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">junit</span><span class="s2">.</span><span class="s1">Assert</span><span class="s2">.*</span>
+
+<span class="s3">/**</span>
+ <span class="s3">* Instrumented test, which will execute on an Android device.</span>
+ <span class="s3">*</span>
+ <span class="s3">* See [testing documentation](http://d.android.com/tools/testing).</span>
+ <span class="s3">*/</span>
+<span class="s1">@RunWith</span><span class="s2">(</span><span class="s1">AndroidJUnit4::</span><span class="s0">class</span><span class="s2">)</span>
+<span class="s0">class </span><span class="s1">ExampleInstrumentedTest </span><span class="s2">{</span>
+    <span class="s1">@Test</span>
+    <span class="s0">fun </span><span class="s1">useAppContext</span><span class="s2">() {</span>
+        <span class="s4">// Context of the app under test.</span>
+        <span class="s0">val </span><span class="s1">appContext </span><span class="s2">= </span><span class="s1">InstrumentationRegistry</span><span class="s2">.</span><span class="s1">getInstrumentation</span><span class="s2">().</span><span class="s1">targetContext</span>
+        <span class="s1">assertEquals</span><span class="s2">(</span><span class="s5">&quot;org.pns.node&quot;</span><span class="s2">, </span><span class="s1">appContext</span><span class="s2">.</span><span class="s1">packageName</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

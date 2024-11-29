@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>MainActivity.class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.class</font>
+</center></td></tr></table>
+<pre><span class="s0">// IntelliJ API Decompiler stub source generated from a class file</span>
+<span class="s0">// Implementation of methods is not available</span>
+
+<span class="s2">package </span><span class="s1">org</span><span class="s3">.</span><span class="s1">pns</span><span class="s3">.</span><span class="s1">node</span>
+
+<span class="s1">public final </span><span class="s2">class </span><span class="s1">MainActivity public constructor</span><span class="s3">() </span><span class="s1">: androidx</span><span class="s3">.</span><span class="s1">appcompat</span><span class="s3">.</span><span class="s1">app</span><span class="s3">.</span><span class="s1">AppCompatActivity</span><span class="s3">, </span><span class="s1">android</span><span class="s3">.</span><span class="s1">hardware</span><span class="s3">.</span><span class="s1">SensorEventListener </span><span class="s3">{</span>
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">database: org</span><span class="s3">.</span><span class="s1">pns</span><span class="s3">.</span><span class="s1">node</span><span class="s3">.</span><span class="s1">data</span><span class="s3">.</span><span class="s1">PlanetaryDatabase </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">earthPulseView: org</span><span class="s3">.</span><span class="s1">pns</span><span class="s3">.</span><span class="s1">node</span><span class="s3">.</span><span class="s1">EarthPulseView </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">environmentalAnalyzer: org</span><span class="s3">.</span><span class="s1">pns</span><span class="s3">.</span><span class="s1">node</span><span class="s3">.</span><span class="s1">analysis</span><span class="s3">.</span><span class="s1">EnvironmentalAnalyzer </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final </span><span class="s2">var </span><span class="s1">lastUpdateTime: kotlin</span><span class="s3">.</span><span class="s1">Long </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final </span><span class="s2">val </span><span class="s1">nodeId: kotlin</span><span class="s3">.</span><span class="s1">String </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">readingsText: android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">TextView </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">scrollView: android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">ScrollView </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">sensorManager: android</span><span class="s3">.</span><span class="s1">hardware</span><span class="s3">.</span><span class="s1">SensorManager </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final </span><span class="s2">val </span><span class="s1">sensorValues: kotlin</span><span class="s3">.</span><span class="s1">collections</span><span class="s3">.</span><span class="s1">MutableMap</span><span class="s3">&lt;</span><span class="s1">kotlin</span><span class="s3">.</span><span class="s1">Int</span><span class="s3">, </span><span class="s1">kotlin</span><span class="s3">.</span><span class="s1">Float</span><span class="s3">&gt; </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">shareButton: android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">Button </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">startButton: android</span><span class="s3">.</span><span class="s1">widget</span><span class="s3">.</span><span class="s1">Button </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final lateinit </span><span class="s2">var </span><span class="s1">webView: android</span><span class="s3">.</span><span class="s1">webkit</span><span class="s3">.</span><span class="s1">WebView </span><span class="s0">/* compiled code */</span>
+
+    <span class="s1">private final </span><span class="s2">fun </span><span class="s1">checkPermissions</span><span class="s3">()</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">private final </span><span class="s2">fun </span><span class="s1">initializeViews</span><span class="s3">()</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">public open </span><span class="s2">fun </span><span class="s1">onAccuracyChanged</span><span class="s3">(</span><span class="s1">sensor: android</span><span class="s3">.</span><span class="s1">hardware</span><span class="s3">.</span><span class="s1">Sensor?</span><span class="s3">, </span><span class="s1">accuracy: kotlin</span><span class="s3">.</span><span class="s1">Int</span><span class="s3">)</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">protected open </span><span class="s2">fun </span><span class="s1">onCreate</span><span class="s3">(</span><span class="s1">savedInstanceState: android</span><span class="s3">.</span><span class="s1">os</span><span class="s3">.</span><span class="s1">Bundle?</span><span class="s3">)</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">protected open </span><span class="s2">fun </span><span class="s1">onDestroy</span><span class="s3">()</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">public open </span><span class="s2">fun </span><span class="s1">onRequestPermissionsResult</span><span class="s3">(</span><span class="s1">requestCode: kotlin</span><span class="s3">.</span><span class="s1">Int</span><span class="s3">, </span><span class="s1">permissions: kotlin</span><span class="s3">.</span><span class="s1">Array</span><span class="s3">&lt;</span><span class="s1">out kotlin</span><span class="s3">.</span><span class="s1">String</span><span class="s3">&gt;, </span><span class="s1">grantResults: kotlin</span><span class="s3">.</span><span class="s1">IntArray</span><span class="s3">)</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">public open </span><span class="s2">fun </span><span class="s1">onSensorChanged</span><span class="s3">(</span><span class="s1">event: android</span><span class="s3">.</span><span class="s1">hardware</span><span class="s3">.</span><span class="s1">SensorEvent</span><span class="s3">)</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">private final </span><span class="s2">fun </span><span class="s1">shareReadings</span><span class="s3">()</span><span class="s1">: kotlinx</span><span class="s3">.</span><span class="s1">coroutines</span><span class="s3">.</span><span class="s1">Job </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">private final </span><span class="s2">fun </span><span class="s1">startSensing</span><span class="s3">()</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">Unit </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+
+    <span class="s1">public final inner </span><span class="s2">class </span><span class="s1">WebAppInterface public constructor</span><span class="s3">() {</span>
+        <span class="s1">@android</span><span class="s3">.</span><span class="s1">webkit</span><span class="s3">.</span><span class="s1">JavascriptInterface public final </span><span class="s2">fun </span><span class="s1">getSensorData</span><span class="s3">()</span><span class="s1">: kotlin</span><span class="s3">.</span><span class="s1">String </span><span class="s3">{ </span><span class="s0">/* compiled code */ </span><span class="s3">}</span>
+    <span class="s3">}</span>
+<span class="s3">}</span>
+
+</pre>
+</body>
+</html>

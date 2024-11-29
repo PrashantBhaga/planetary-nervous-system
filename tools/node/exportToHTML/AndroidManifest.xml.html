@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>AndroidManifest.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d5b778;}
+.s1 { color: #bcbec4;}
+.s2 { color: #6aab73;}
+.s3 { color: #bcbec4;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AndroidManifest.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s2">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s2">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+<span class="s0">&lt;manifest </span><span class="s1">xmlns:android</span><span class="s2">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">package</span><span class="s2">=&quot;org.pns.node.test&quot; </span><span class="s0">&gt;</span>
+
+    <span class="s0">&lt;uses-sdk</span>
+        <span class="s1">android:minSdkVersion</span><span class="s2">=&quot;24&quot;</span>
+        <span class="s1">android:targetSdkVersion</span><span class="s2">=&quot;34&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;instrumentation</span>
+        <span class="s1">android:name</span><span class="s2">=&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+        <span class="s1">android:functionalTest</span><span class="s2">=&quot;false&quot;</span>
+        <span class="s1">android:handleProfiling</span><span class="s2">=&quot;false&quot;</span>
+        <span class="s1">android:label</span><span class="s2">=&quot;Tests for org.pns.node&quot;</span>
+        <span class="s1">android:targetPackage</span><span class="s2">=&quot;org.pns.node&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;uses-permission </span><span class="s1">android:name</span><span class="s2">=&quot;android.permission.REORDER_TASKS&quot; </span><span class="s0">/&gt;</span>
+
+    <span class="s0">&lt;queries&gt;</span>
+        <span class="s0">&lt;package </span><span class="s1">android:name</span><span class="s2">=&quot;androidx.test.orchestrator&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;package </span><span class="s1">android:name</span><span class="s2">=&quot;androidx.test.services&quot; </span><span class="s0">/&gt;</span>
+        <span class="s0">&lt;package </span><span class="s1">android:name</span><span class="s2">=&quot;com.google.android.apps.common.testing.services&quot; </span><span class="s0">/&gt;</span>
+    <span class="s0">&lt;/queries&gt;</span>
+
+    <span class="s0">&lt;application</span>
+        <span class="s1">android:debuggable</span><span class="s2">=&quot;true&quot;</span>
+        <span class="s1">android:extractNativeLibs</span><span class="s2">=&quot;false&quot; </span><span class="s0">&gt;</span>
+        <span class="s0">&lt;uses-library </span><span class="s1">android:name</span><span class="s2">=&quot;android.test.runner&quot; </span><span class="s0">/&gt;</span>
+
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/WhiteBackgroundTheme&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter </span><span class="s1">android:priority</span><span class="s2">=&quot;-100&quot; </span><span class="s0">&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.LAUNCHER&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/WhiteBackgroundTheme&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter </span><span class="s1">android:priority</span><span class="s2">=&quot;-100&quot; </span><span class="s0">&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.LAUNCHER&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+        <span class="s0">&lt;activity</span>
+            <span class="s1">android:name</span><span class="s2">=&quot;androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity&quot;</span>
+            <span class="s1">android:exported</span><span class="s2">=&quot;true&quot;</span>
+            <span class="s1">android:theme</span><span class="s2">=&quot;@style/WhiteBackgroundDialogTheme&quot; </span><span class="s0">&gt;</span>
+            <span class="s0">&lt;intent-filter </span><span class="s1">android:priority</span><span class="s2">=&quot;-100&quot; </span><span class="s0">&gt;</span>
+                <span class="s0">&lt;category </span><span class="s1">android:name</span><span class="s2">=&quot;android.intent.category.LAUNCHER&quot; </span><span class="s0">/&gt;</span>
+            <span class="s0">&lt;/intent-filter&gt;</span>
+        <span class="s0">&lt;/activity&gt;</span>
+    <span class="s0">&lt;/application&gt;</span>
+
+<span class="s0">&lt;/manifest&gt;</span></pre>
+</body>
+</html>

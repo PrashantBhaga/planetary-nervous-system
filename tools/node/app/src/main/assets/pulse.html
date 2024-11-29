@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth Pulse</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 16px;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f8faf9;
+        }
+        .dashboard {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .metric-card {
+            padding: 16px;
+            border-radius: 8px;
+            color: #1a472a;
+        }
+        .light-card {
+            background: #ecfdf5;
+        }
+        .pressure-card {
+            background: #eff6ff;
+            color: #1e3a8a;
+        }
+        .metric-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .metric-status {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .pulse-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #22c55e;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="metrics">
+        <div class="metric-card light-card">
+            <div class="metric-title">
+                <span class="pulse-indicator"></span>
+                Light Energy
+            </div>
+            <div id="lightValue" class="metric-value">-</div>
+            <div id="lightStatus" class="metric-status"></div>
+        </div>
+        <div class="metric-card pressure-card">
+            <div class="metric-title">
+                <span class="pulse-indicator" style="background: #3b82f6"></span>
+                Atmospheric Pressure
+            </div>
+            <div id="pressureValue" class="metric-value">-</div>
+            <div id="pressureStatus" class="metric-status"></div>
+        </div>
+    </div>
+    <canvas id="pulseChart"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('pulseChart').getContext('2d');
+    const maxDataPoints = 20;
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Light (lux)',
+                borderColor: '#22c55e',
+                data: [],
+                yAxisID: 'y-light',
+            }, {
+                label: 'Pressure (hPa)',
+                borderColor: '#3b82f6',
+                data: [],
+                yAxisID: 'y-pressure',
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            scales: {
+                'y-light': {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Light (lux)'
+                    },
+                    grid: {
+                        color: '#22c55e22'
+                    }
+                },
+                'y-pressure': {
+                    type: 'linear',
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Pressure (hPa)'
+                    },
+                    grid: {
+                        color: '#3b82f622'
+                    }
+                }
+            }
+        }
+    });
+
+    function interpretLight(value) {
+        if (value < 100) return "Night/Deep Shade - Earth's Rest Period";
+        if (value < 1000) return "Dawn/Dusk - Transition Period";
+        return "Daylight - Active Energy Period";
+    }
+
+    function interpretPressure(value) {
+        if (value < 980) return "Low Pressure - Weather System Approaching";
+        if (value < 1020) return "Stable Atmospheric Conditions";
+        return "High Pressure - Clear Weather System";
+    }
+
+    function updateSensorData(data) {
+        // Update current values
+        document.getElementById('lightValue').textContent = `${data.light.toFixed(1)} lux`;
+        document.getElementById('pressureValue').textContent = `${data.pressure.toFixed(1)} hPa`;
+
+        document.getElementById('lightStatus').textContent = interpretLight(data.light);
+        document.getElementById('pressureStatus').textContent = interpretPressure(data.pressure);
+
+        // Update chart
+        const now = new Date().toLocaleTimeString();
+        chart.data.labels.push(now);
+        chart.data.datasets[0].data.push(data.light);
+        chart.data.datasets[1].data.push(data.pressure);
+
+        // Keep only last maxDataPoints
+        if (chart.data.labels.length > maxDataPoints) {
+            chart.data.labels.shift();
+            chart.data.datasets.forEach(dataset => dataset.data.shift());
+        }
+
+        chart.update();
+    }
+</script>
+</body>
+</html>

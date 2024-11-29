@@ -1,0 +1,12 @@
+package org.pns.node.analysis
+
+enum class PatternType {
+    DAWN_CHORUS,
+    PRESSURE_FRONT,
+    STORM_APPROACHING,
+    CLEAR_WEATHER,
+    MIGRATION_WEATHER,
+    NOCTURNAL_ACTIVITY,
+    PHOTOSYNTHESIS_PEAK,
+    ECOSYSTEM_STRESS
+}
