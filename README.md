@@ -67,6 +67,53 @@ This isn’t a centralized solution—it’s an organic, decentralized system de
 	•	Fair distribution of resources and responsibilities.
 	•	Collective action for the benefit of ecosystems.
 
+# How PNS Works 🌍
+
+## Global Solution Sharing
+See how solutions flow from one part of the world to another:
+
+```mermaid
+graph TD
+    subgraph Brazil[Brazil 🇧🇷]
+        BN[📱 Local Nodes] -->|Data| BV[✅ Validation]
+        BV -->|Verified| BB[🔗 Blockchain]
+        BB -->|Analysis| BA[🤖 AI Solution]
+    end
+
+    subgraph Africa[South Africa 🇿🇦]
+        AN[📱 Local Nodes] -->|Similar Data| AV[✅ Validation]
+        AV -->|Verified| AB[🔗 Blockchain]
+        AB -->|Match| AA[🤖 AI Solution]
+    end
+
+    BA -->|Share Solution| AA
+    AA -->|Implement| S[🌍 Problem Solved]
+
+    style Brazil fill:#90EE90
+    style Africa fill:#87CEEB
+```
+## Simple Data Flow
+Every piece of environmental data follows this journey:
+```mermaid
+graph LR
+    N[📱 Nodes] -->|Send Data| V[✅ Validation]
+    V -->|Verified| B[🔗 Blockchain]
+    B -->|Analysis| A[🤖 AI]
+    A -->|Solutions| G[🌍 Global Action]
+```
+## Your Phone's Superpowers
+Your phone already has these amazing sensors built in:
+```mermaid
+graph TD
+    P[📱 Phone] --> S1[🌡️ Temperature]
+    P --> S2[💨 Air Quality]
+    P --> S3[📍 Location]
+    P --> S4[📳 Movement]
+    
+    S1 & S2 & S3 & S4 --> D[✨ Earth's Data]
+```
+> 💡 **Real World Example:** When nodes in Brazil detect and solve a water quality issue, the same solution can automatically help similar problems in South Africa - all through the power of connected phones!
+
 🛠️ Technical Foundations
 
 Decentralized Architecture
