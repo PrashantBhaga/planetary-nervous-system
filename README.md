@@ -3,28 +3,22 @@
 Imagine a world where the Earth could sense environmental changes, coordinate responses, and heal itself—just like your body does. The Planetary Nervous System (PNS) is a groundbreaking project turning this vision into reality. By combining cutting-edge technology with decentralized, community-driven solutions, PNS creates a self-organizing network that mirrors the planet’s natural intelligence.
 
 ```mermaid
-mindmap
-  root((🌍 PNS))
-    (👁️ Sensing Layer)
-        [📱 Smart Devices]
-        [🌡️ Environmental Sensors]
-        [📡 Weather Stations]
-        [🛰️ Satellites]
-    (🧠 Processing Layer)
-        [💻 Edge Computing]
-        [🔗 Blockchain]
-        [🤖 AI Analysis]
-        [🌐 Distributed Network]
-    (💪 Response Layer)
-        [🚨 Early Warning]
-        [🎯 Resource Allocation]
-        [🤝 Community Action]
-        [🌱 Ecosystem Healing]
-    (👥 Community Layer)
-        [🗳️ Democratic Governance]
-        [📊 Transparent Operations]
-        [💡 Collective Intelligence]
-        [🌍 Environmental Priority]
+graph TD
+    PNS((🌍 PNS))
+    SL[👁️ Sensing Layer]
+    PL[🧠 Processing Layer]
+    RL[💪 Response Layer]
+    CL[👥 Community Layer]
+    
+    PNS --> SL
+    PNS --> PL
+    PNS --> RL
+    PNS --> CL
+    
+    SL --> SD[📱 Devices & Sensors]
+    PL --> PC[💻 Computing & AI]
+    RL --> RA[🎯 Actions & Healing]
+    CL --> CG[🗳️ Governance & Ops]
 ```
 
 🌟 Core Vision: A Nervous System for the Earth
@@ -33,6 +27,23 @@ Inspired by how forests connect through underground mycorrhizal networks and how
 	•	Sense environmental conditions in real-time.
 	•	Coordinate resources to solve problems.
 	•	Heal ecosystems through collective action.
+
+```mermaid
+graph LR
+    N[🌳 Nature's Way] -.Inspires.-> P[🌍 PNS Network]
+    
+    subgraph Forest
+    N --> NS[🌱 Sharing Resources]
+    N --> NW[⚡ Warning Others]
+    N --> NH[💚 Healing Together]
+    end
+    
+    subgraph PNS
+    P --> PS[📡 Distributing Aid]
+    P --> PW[🚨 Early Warnings]
+    P --> PH[🤝 Community Healing]
+    end
+```
 
 This isn’t a centralized solution—it’s an organic, decentralized system designed to serve all life on Earth.
 
