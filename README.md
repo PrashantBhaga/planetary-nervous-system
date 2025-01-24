@@ -170,7 +170,7 @@ This project is licensed under the GNU Affero General Public License v3.0 with E
 Every step you take with PNS strengthens the planet’s ability to adapt and thrive. Join us in creating a world where Earth feels, responds, and heals itself—just like nature intended.
 
 For questions, feedback, or ideas:
-📧 Email: EarthDeservesBetter@proton.me
+📧 Discord: (https://discord.gg/Y6DXvPtM)
 🌐 Issue Tracker: GitHub Issues
 
 Let’s build the future together.
