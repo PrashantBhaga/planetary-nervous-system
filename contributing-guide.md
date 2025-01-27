@@ -172,4 +172,4 @@ All contributions must:
 3. Optimize resources
 4. Document benefits
 
-Contact EarthDeservesBetter@proton.me with questions.
+Join the Discord https://discord.gg/Y6DXvPtM with questions.
