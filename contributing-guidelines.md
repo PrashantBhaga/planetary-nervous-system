@@ -55,4 +55,4 @@ Update:
 
 ## Contact
 
-Questions: EarthDeservesBetter@proton.me
+Join the Discord https://discord.gg/Y6DXvPtM with questions.
