@@ -1,27 +1,31 @@
 flowchart TD
-    subgraph DataCollection[Sensor Data Collection]
+    subgraph DataCollection["Sensor Data Collection"]
         S1[PNS Nodes] --> D1[Raw Environmental Data]
         S2[Quantum States] --> D1
         S3[Pattern Recognition] --> D1
     end
-    
-    subgraph Validation[Truth Validation]
+
+    subgraph Validation["Truth Validation"]
         V1[Physics Validation]
         V2[Pattern Validation]
         V3[Quantum Validation]
         V4[Node Consensus]
     end
-    
-    subgraph VerifiedTruth[Verified Environmental Truth]
+
+    subgraph VerifiedTruth["Verified Environmental Truth"]
         T1[Blockchain Record]
         T2[Confidence Metrics]
         T3[Supporting Evidence]
     end
-    
+
     DataCollection --> Validation
     Validation --> VerifiedTruth
-    VerifiedTruth --> |Verified Data| DataCollection
-    
-    style DataCollection fill:#f9f,stroke:#333
-    style Validation fill:#9ff,stroke:#333
-    style VerifiedTruth fill:#ff9,stroke:#333
+    VerifiedTruth -->|Verified Data| DataCollection
+
+    classDef collection fill:#f9f,stroke:#333
+    classDef validation fill:#9ff,stroke:#333
+    classDef truth fill:#ff9,stroke:#333
+
+    class DataCollection collection
+    class Validation validation
+    class VerifiedTruth truth
